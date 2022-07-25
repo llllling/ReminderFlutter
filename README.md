@@ -19,7 +19,7 @@ A new Flutter project.
 * asset : fonts, image, logo등 
 * lib 
     * pages : 화면 UI, 화면 전반 담당
-    * widgets : 화면을 구성하는 widgets 모임. 화면의 부분부분, 재사용되는 UI들 
+    * widgets : 화면을 구성하는 widgets 모임. 화면의 부분부분, 재사용되는 UI들, 하위에 페이지별 폴더를 만들고, 페이지별로 사용되는 위젯파일생성, 두 번이상 사용되면 common 폴더생성 후 넣어라. 
     * utils 
     * providers : provider과 관련된 클래스들 ! 즉, 비즈니스 로직
     * models : 데이터베이스와 데이터를 주고받기 위한 데이터 model들 
