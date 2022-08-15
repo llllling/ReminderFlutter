@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:remainder_flutter/pages/MemoMainView.dart';
+import 'package:remainder_flutter/pages/memo_main_view.dart';
 
 void main() {
   runApp(const MyApp());
