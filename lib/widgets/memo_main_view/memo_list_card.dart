@@ -7,10 +7,21 @@ class MemoListCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: ListTile(
-          title: Text(data.content),
-          subtitle: Text('${data.noticeDate} ${data.noticeTime}')),
+    return GestureDetector(
+        child: Card(
+            child: ListTile(
+      title: Text(data.content),
+      subtitle: Text('${data.noticeDate} ${data.noticeTime}'),
+      trailing: TextButton(
+        onPressed: () {},
+        child: const Icon(
+          Icons.edit_note,
+        ),
+      ),
+    ))
+    onTap: () {
+
+    },
     );
   }
 }
