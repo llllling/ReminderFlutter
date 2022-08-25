@@ -4,21 +4,24 @@ A new Flutter project.
 
 [online documentation](https://docs.flutter.dev/)
 
-# »óÅÂ°ü¸®
-* provider·Î ¼±Á¤Çß´Ù ! °ø½Ä¹®¼­¿¡ ÃßÃµÇÑ´Ù°í ÇÏ³×, BlocÆÐÅÏÀ» provider·Î ±¸ÇöÇØº¸Àå !!
+# ìƒíƒœê´€ë¦¬
+
+- providerë¡œ ì„ ì •í–ˆë‹¤ ! ê³µì‹ë¬¸ì„œì— ì¶”ì²œí•œë‹¤ê³  í•˜ë„¤, BlocíŒ¨í„´ì„ providerë¡œ êµ¬í˜„í•´ë³´ìž¥ !!
 
 # Naming Convention
-- Æú´õ¸í, ÆÄÀÏ¸íÀº ´Ü¼ö·Î snake.
-- Å¬·¡½º¸í PascalCase
-- º¯¼ö¸í,ÇÔ¼ö¸í camelCase
-- º¯¼ö¸í 20ÀÚ ¾È³Ñ¾î°¡°Ô, ³Ñ¾î°¥ °æ¿ì ¾à¾î(¾ËÆÄºª ÀÚÀ½À¸·Î Ãà¾à)
 
-# Æú´õ ±¸ºÐ
-* asset : fonts, image, logoµî 
-* lib 
-    * pages : È­¸é UI, È­¸é Àü¹Ý ´ã´ç
-    * widgets : È­¸éÀ» ±¸¼ºÇÏ´Â widgets ¸ðÀÓ. È­¸éÀÇ ºÎºÐºÎºÐ, Àç»ç¿ëµÇ´Â UIµé, ÇÏÀ§¿¡ ÆäÀÌÁöº° Æú´õ¸¦ ¸¸µé°í, ÆäÀÌÁöº°·Î »ç¿ëµÇ´Â À§Á¬ÆÄÀÏ»ý¼º, µÎ ¹øÀÌ»ó »ç¿ëµÇ¸é common Æú´õ»ý¼º ÈÄ ³Ö¾î¶ó. 
-    * utils 
-    * providers : provider°ú °ü·ÃµÈ Å¬·¡½ºµé ! Áï, ºñÁî´Ï½º ·ÎÁ÷
-    * models : µ¥ÀÌÅÍº£ÀÌ½º¿Í µ¥ÀÌÅÍ¸¦ ÁÖ°í¹Þ±â À§ÇÑ µ¥ÀÌÅÍ modelµé 
-    * services : ¾Û ¿ÜºÎÀÇ ´Ù¸¥ ¼­ºñ½º ¿¬°áÇÏ´Â ºÎºÐ! 
+- í´ë”ëª…, íŒŒì¼ëª…ì€ ë‹¨ìˆ˜ë¡œ snake.
+- í´ëž˜ìŠ¤ëª… PascalCase
+- ë³€ìˆ˜ëª…,í•¨ìˆ˜ëª… camelCase
+- ë³€ìˆ˜ëª… 20ìž ì•ˆë„˜ì–´ê°€ê²Œ, ë„˜ì–´ê°ˆ ê²½ìš° ì•½ì–´(ì•ŒíŒŒë²³ ìžìŒìœ¼ë¡œ ì¶•ì•½)
+
+# í´ë” êµ¬ë¶„
+
+- asset : fonts, image, logoë“±
+- lib
+  - pages : í™”ë©´ UI, í™”ë©´ ì „ë°˜ ë‹´ë‹¹
+  - widgets : í™”ë©´ì„ êµ¬ì„±í•˜ëŠ” widgets ëª¨ìž„. í™”ë©´ì˜ ë¶€ë¶„ë¶€ë¶„, ìž¬ì‚¬ìš©ë˜ëŠ” UIë“¤, í•˜ìœ„ì— íŽ˜ì´ì§€ë³„ í´ë”ë¥¼ ë§Œë“¤ê³ , íŽ˜ì´ì§€ë³„ë¡œ ì‚¬ìš©ë˜ëŠ” ìœ„ì ¯íŒŒì¼ìƒì„±, ë‘ ë²ˆì´ìƒ ì‚¬ìš©ë˜ë©´ common í´ë”ìƒì„± í›„ ë„£ì–´ë¼.
+  - utils
+  - providers : providerê³¼ ê´€ë ¨ëœ í´ëž˜ìŠ¤ë“¤ ! ì¦‰, ë¹„ì¦ˆë‹ˆìŠ¤ ë¡œì§
+  - models : ë°ì´í„°ë² ì´ìŠ¤ì™€ ë°ì´í„°ë¥¼ ì£¼ê³ ë°›ê¸° ìœ„í•œ ë°ì´í„° modelë“¤
+  - services : ì•± ì™¸ë¶€ì˜ ë‹¤ë¥¸ ì„œë¹„ìŠ¤ ì—°ê²°í•˜ëŠ” ë¶€ë¶„!
