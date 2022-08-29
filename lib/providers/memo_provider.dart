@@ -3,11 +3,11 @@ import 'package:remainder_flutter/models/memo.dart';
 
 class MemoProvider extends ChangeNotifier {
   final List<Memo> _memoList = [
-    Memo('³»¿ë1', '22/7/30', '1:00'),
-    Memo('³»¿ë2', '22/7/30', '2:00'),
-    Memo('³»¿ë3', '22/7/30', '4:00'),
-    Memo('³»¿ë4', '22/7/30', '5:00'),
-    Memo('³»¿ë5', '22/7/30', '18:00')
+    Memo('ë‚´ìš©1', '22/7/30', '1:00'),
+    Memo('ë‚´ìš©2', '22/7/30', '2:00'),
+    Memo('ë‚´ìš©3', '22/7/30', '4:00'),
+    Memo('ë‚´ìš©4', '22/7/30', '5:00'),
+    Memo('ë‚´ìš©5', '22/7/30', '18:00')
   ];
 
   List<Memo> get memoList => _memoList;
