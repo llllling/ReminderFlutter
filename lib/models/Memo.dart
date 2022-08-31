@@ -1,19 +1,18 @@
+import './repeat_cycle.dart';
+
 class Memo {
   String _content;
   String _noticeDate;
-  String _noticeTime;
+  RepeatCycle? _repeat;
 
-  Memo({required this.content, required this.noticeDate, required  this.noticeTime});
+  Memo(this._content, this._noticeDate, this._repeat);
 
-  factory Memo.fromJson(Map<String, dynamic> json) => new Memo({
-    content: json['content'],
-    noticeDate: json['noticeDate'],
-    noticeTime: json['noticeTime'],
-  })
+  factory Memo.fromJson(Map<String, dynamic> json) =>
+      Memo(json['content'], json['noticeDate'], json['reapeat']);
 
-  toJson() => {
-    'content' : content,
-    'noticeDate' : noticeDate,
-    'noticeTime' : noticeTime,
-  }
+  Map<String, dynamic> toJson() => {
+        'content': _content,
+        'noticeDate': _noticeDate,
+        'noticeTime': _repeat,
+      };
 }
