@@ -4,6 +4,6 @@ class RepeatCycle {
 
   RepeatCycle(this._repeatCode, this._repeatName);
 
-  Map<String, dynamic> toJson() =>
+  Map<String, Object> toJson() =>
       {'repeatCode': _repeatCode, 'repeatName': _repeatName};
 }

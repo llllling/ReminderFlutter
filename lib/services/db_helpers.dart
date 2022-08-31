@@ -1,56 +1,73 @@
+import 'package:path/path.dart';
 import 'package:remainder_flutter/models/memo.dart';
 import 'package:sqflite/sqflite.dart';
 
 enum DBType { sqlite }
 
 abstract class DBHelper {
-  factory DBHelper.fromJson(Map<String, dynamic> json) {
+  factory DBHelper.fromJson(Map<String, Object> json) {
     switch (json['type'] as DBType) {
       case DBType.sqlite:
         return _Sqlite();
     }
   }
-  create([Map param]);
-  find([Map param]);
-  save([Map param]);
-  remove([Map param]);
-  modify([Map param]);
-  close([Map param]);
+  findAll();
+  find(Map dto);
+  save(Map dto);
+  remove(Map dto);
+  modify(Map dto);
 }
 
 class _Sqlite implements DBHelper {
   final String tableName = 'memo';
   late Database db;
-  Map<String,dynamic> test = {
-    
-  }
-  Future open(String path) async {
-    db = await openDatabase(
-      path,
-      onCreate: (Database db, int version) async => { 
-        await create(  'CREATE TABLE $tableName (id INTEGER PRIMARY KEY AUTOINCREMENT, content TEXT, noticeDate TEXT, repeat INTEGER )'),
-    );
+  _Sqlite() {
+    open();
   }
 
- @override
-  Future<void> create(Map{db : Database,  query : String} param) {
-    return db.execute(query);
+  Future open() async {
+    db = await openDatabase(join(await getDatabasesPath(), 'memo_database.db'),
+        onCreate: _onCreate);
+  }
+
+  Future<void> _onCreate(Database db, int version) async {
+    await db.execute(
+        'CREATE TABLE repeat_cycle (code TEXT PRIMARY KEY, name TEXT)');
+    await db.rawInsert(
+        'INSERT INTO repeat_cycle(code, name) VALUES("none", "안함"), ("day", "매일"), ("week", "매주"), ("month", "매월")');
+    await db.execute(
+        'CREATE TABLE $tableName (id INTEGER PRIMARY KEY AUTOINCREMENT, content TEXT, noticeDate TEXT, repeat TEXT,  FOREIGN KEY(repeat) REFERENCES repeat_cycle(code) )');
   }
 
   @override
-  find() {}
-
-  @override
-  modify() {}
-
-  @override
-  remove() {}
-
-  @override
-  Future<int> save(Map<Memo> memo) {
-    return db.insert(tableName, memo.toJson());
+  Future<List<Memo>> findAll() async {
+    List<Map<String, Object?>> result = await db.query(tableName);
+    return result.map((data) => Memo.fromJson(data)).toList();
   }
 
- @override
+  @override
+  Future<Memo?> find(Map dto) async {
+    List<Map<String, Object?>> result =
+        await db.query(tableName, where: 'id = ?', whereArgs: [dto['data'].id]);
+
+    return result.isNotEmpty ? Memo.fromJson(result[0]) : null;
+  }
+
+  @override
+  Future<int> modify(Map dto) {
+    return db.update(tableName, dto['data'].toJson(),
+        where: 'id = ?', whereArgs: [dto['data'].id]);
+  }
+
+  @override
+  Future<int> remove(Map dto) {
+    return db.delete(tableName, where: 'id = ?', whereArgs: [dto['data'].id]);
+  }
+
+  @override
+  Future<int> save(Map dto) {
+    return db.insert(tableName, dto['data'].toJson());
+  }
+
   Future close() async => db.close();
 }
