@@ -8,7 +8,7 @@ class MemoList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      children: listData.map<Widget>((data) => MemoListCard(data)).toList(),
+      children: [].map<Widget>((data) => MemoListCard(data)).toList(),
     );
   }
 }

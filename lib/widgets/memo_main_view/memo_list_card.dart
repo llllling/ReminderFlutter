@@ -11,7 +11,7 @@ class MemoListCard extends StatelessWidget {
         child: Card(
             child: ListTile(
       title: Text(data.content),
-      subtitle: Text('${data.noticeDate} ${data.noticeTime}'),
+      subtitle: Text('${data.noticeDate} ${data.repeat}'),
       trailing: TextButton(
         onPressed: () {},
         child: const Icon(
@@ -19,9 +19,9 @@ class MemoListCard extends StatelessWidget {
         ),
       ),
     ))
-    onTap: () {
+        // onTap: () {
 
-    },
-    );
+        // },
+        );
   }
 }
