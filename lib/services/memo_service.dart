@@ -9,18 +9,18 @@ class MemoService {
     dbHelper = DBHelper(init: init);
   }
 
-  Future<List<Function>> init() async {
-    return [
-      dbHelper.rawQueryExecute(DBDto(
-          queryString:
-              'CREATE TABLE repeat_cycle (code TEXT PRIMARY KEY, name TEXT)')),
-      dbHelper.rawQueryExecute(DBDto(
-          queryString:
-              'INSERT INTO repeat_cycle(code, name) VALUES("none", "안함"), ("day", "매일"), ("week", "매주"), ("month", "매월")')),
-      dbHelper.rawQueryExecute(DBDto(
-          queryString:
-              'CREATE TABLE $tableName (id INTEGER PRIMARY KEY AUTOINCREMENT, content TEXT, noticeDate TEXT, repeat TEXT,  FOREIGN KEY(repeat) REFERENCES repeat_cycle(code) )'))
-    ];
+  Future<void> init() async {
+    dbHelper.transction(() => [
+          dbHelper.rawQueryExecute(DBDto(
+              queryString:
+                  'CREATE TABLE repeat_cycle (code TEXT PRIMARY KEY, name TEXT)')),
+          dbHelper.rawQueryExecute(DBDto(
+              queryString:
+                  'INSERT INTO repeat_cycle(code, name) VALUES("none", "안함"), ("day", "매일"), ("week", "매주"), ("month", "매월")')),
+          dbHelper.rawQueryExecute(DBDto(
+              queryString:
+                  'CREATE TABLE $tableName (id INTEGER PRIMARY KEY AUTOINCREMENT, content TEXT, noticeDate TEXT, repeat TEXT,  FOREIGN KEY(repeat) REFERENCES repeat_cycle(code) )'))
+        ]);
   }
 
   Future<List<Map<String, Object?>>> findAll() async {

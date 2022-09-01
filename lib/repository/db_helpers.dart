@@ -30,8 +30,9 @@ class DBHelper {
   }
 
   Future<void> _open(Function onCreate) async {
-    db = await openDatabase(join(await getDatabasesPath(), 'memo_database.db'),
-        onCreate: (Database db, int version) async {});
+    db = await openDatabase(
+      join(await getDatabasesPath(), 'memo_database.db'),
+    );
   }
 
   Function rawQueryExecute(DBDto dto) => (Database db) async {
@@ -64,9 +65,9 @@ class DBHelper {
     return db.insert(dto.tableName!, dto.data!);
   }
 
-  Future close() async => db.close();
+  Future<void> close() async => db.close();
 
-  void transction(Function queries) async {
+  Future<void> transction(Function queries) async {
     await db.transaction((txn) async {
       for (Function func in queries()) {
         await func(db);
