@@ -24,4 +24,5 @@ A new Flutter project.
   - utils
   - providers : provider과 관련된 클래스들 ! 즉, 비즈니스 로직
   - models : 데이터베이스와 데이터를 주고받기 위한 데이터 model들
-  - services : 앱 외부의 다른 서비스 연결하는 부분!
+  - services : 앱 외부의 다른 서비스 연결하는 부분! repository providers 사이에서 연결하는 부분 !
+  - repository : 저장소 !

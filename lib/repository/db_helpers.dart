@@ -1,25 +1,29 @@
 import 'package:path/path.dart';
-import 'package:remainder_flutter/models/memo.dart';
 import 'package:sqflite/sqflite.dart';
 
 enum DBType { sqlite }
 
 class DBDto {
-  String tableName;
-  String? query;
+  String? tableName;
+  String? queryString;
   Map<String, Object?>? data;
   List<String>? where;
   List<Object>? whereArgs;
 
-  DBDto(this.tableName, {this.query, this.data, this.where, this.whereArgs});
+  DBDto(
+      {this.tableName,
+      this.queryString,
+      this.data,
+      this.where,
+      this.whereArgs});
 }
 
 abstract class DBHelper {
   DBHelper();
-  factory DBHelper.fromJson(DBType type) {
+  factory DBHelper.fromJson(DBType type, Function init) {
     switch (type) {
       case DBType.sqlite:
-        return _Sqlite();
+        return Sqlite(init);
     }
   }
   findAll(DBDto dto);
@@ -27,56 +31,61 @@ abstract class DBHelper {
   save(DBDto dto);
   remove(DBDto dto);
   modify(DBDto dto);
+  close();
+  rawQueryExecute(DBDto dto);
 }
 
-class _Sqlite extends DBHelper {
+class Sqlite extends DBHelper {
   late Database db;
+  Sqlite(Function init) {
+    open(init);
+  }
 
   Future open(Function onCreate) async {
     db = await openDatabase(join(await getDatabasesPath(), 'memo_database.db'),
         onCreate: (Database db, int version) async {
-      await onCreate(db);
+      for (Function func in onCreate()) {
+        await func(db);
+      }
     });
   }
 
-  Function create(String query) => (Database db) async {
-        await db.execute(query);
-      };
-
-  Function rawInsert(String query) => (Database db) async {
-        return await db.rawInsert(query);
+  @override
+  Function rawQueryExecute(DBDto dto) => (Database db) async {
+        await db.execute(dto.queryString!);
       };
 
   @override
   Future<List<Map<String, Object?>>> findAll(DBDto dto) async {
-    return await db.query(dto.tableName);
+    return db.query(dto.tableName!);
   }
 
   @override
   Future<List<Map<String, Object?>>> find(DBDto dto) async {
-    return await db.query(dto.tableName,
+    return db.query(dto.tableName!,
         where: dto.where?.reduce((value, element) => value += '$element = ? '),
         whereArgs: dto.whereArgs);
   }
 
   @override
   Future<int> modify(DBDto dto) {
-    return db.update(dto.tableName, dto.data!,
+    return db.update(dto.tableName!, dto.data!,
         where: dto.where?.reduce((value, element) => value += '$element = ? '),
         whereArgs: dto.whereArgs);
   }
 
   @override
   Future<int> remove(DBDto dto) {
-    return db.delete(dto.tableName,
+    return db.delete(dto.tableName!,
         where: dto.where?.reduce((value, element) => value += '$element = ? '),
         whereArgs: dto.whereArgs);
   }
 
   @override
   Future<int> save(DBDto dto) {
-    return db.insert(dto.tableName, dto.data!);
+    return db.insert(dto.tableName!, dto.data!);
   }
 
+  @override
   Future close() async => db.close();
 }
