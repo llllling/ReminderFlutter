@@ -5,7 +5,7 @@ class RepeatCycleService {
   final String tableName = 'repeat_cycle';
 
   RepeatCycleService() {
-    dbHelper = DBHelper.fromJson(DBType.sqlite);
+    dbHelper = DBHelper();
   }
 
   Future<List<Map<String, Object?>>> findAll() async {

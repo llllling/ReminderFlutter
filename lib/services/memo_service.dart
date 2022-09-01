@@ -6,7 +6,7 @@ class MemoService {
   final String tableName = 'memo';
 
   MemoService() {
-    dbHelper = DBHelper.fromJson(DBType.sqlite, init: init);
+    dbHelper = DBHelper(init: init);
   }
 
   Future<List<Function>> init() async {
