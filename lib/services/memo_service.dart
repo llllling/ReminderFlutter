@@ -6,10 +6,10 @@ class MemoService {
   final String tableName = 'memo';
 
   MemoService() {
-    dbHelper = DBHelper.fromJson(DBType.sqlite, init);
+    dbHelper = DBHelper.fromJson(DBType.sqlite, init: init);
   }
 
-  init() async {
+  Future<List<Function>> init() async {
     return [
       dbHelper.rawQueryExecute(DBDto(
           queryString:
@@ -23,20 +23,20 @@ class MemoService {
     ];
   }
 
-  findAll() async {
+  Future<List<Map<String, Object?>>> findAll() async {
     return dbHelper.findAll(DBDto(tableName: tableName));
   }
 
-  save(Memo memo) async {
+  Future<int> save(Memo memo) async {
     return dbHelper.save(DBDto(tableName: tableName, data: memo.toJson()));
   }
 
-  remove(int id) async {
+  Future<int> remove(int id) async {
     return dbHelper
         .remove(DBDto(tableName: tableName, where: ['id'], whereArgs: [id]));
   }
 
-  modify(Memo memo) async {
+  Future<int> modify(Memo memo) async {
     return dbHelper.modify(DBDto(
         tableName: tableName,
         data: memo.toJson(),
@@ -44,7 +44,7 @@ class MemoService {
         whereArgs: [memo.id]));
   }
 
-  close() {
+  void close() {
     dbHelper.close();
   }
 }

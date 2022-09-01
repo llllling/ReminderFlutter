@@ -12,7 +12,7 @@ class MemoListCard extends StatelessWidget {
             child: ListTile(
       title: Text(data.content),
       subtitle: Text('${data.noticeDate} ${data.repeat}'),
-      trailing: TextButton(
+      trailing: ElevatedButton(
         onPressed: () {},
         child: const Icon(
           Icons.edit_note,
