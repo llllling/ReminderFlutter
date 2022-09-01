@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:remainder_flutter/pages/memo_main_view.dart';
 import 'package:remainder_flutter/providers/memo_provider.dart';
+import 'package:remainder_flutter/providers/repeat_cycle_provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,8 +19,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: ChangeNotifierProvider(
-        create: (_) => MemoProvider(),
+      home: MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (_) => MemoProvider()),
+          ChangeNotifierProvider(create: (_) => RepeatCycleProvider())
+        ],
         child: const MemoMainView(),
       ),
     );

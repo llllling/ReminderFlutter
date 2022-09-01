@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:remainder_flutter/providers/memo_provider.dart';
 import 'package:remainder_flutter/widgets/memo_main_view/memo_list_card.dart';
 
 class MemoList extends StatelessWidget {
@@ -6,8 +8,11 @@ class MemoList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: [].map<Widget>((data) => MemoListCard(data)).toList(),
-    );
+    return Consumer<MemoProvider>(
+        builder: (context, state, child) => ListView(
+              children: state.memoList
+                  .map<Widget>((data) => MemoListCard(data))
+                  .toList(),
+            ));
   }
 }
