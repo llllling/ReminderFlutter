@@ -7,6 +7,10 @@ class MemoProvider with ChangeNotifier {
   List<Memo> _memoList = [];
   List<Memo> get memoList => _memoList;
 
+  // MemoProvider() {
+  //   findMemoList();
+  // }
+
   void findMemoList() async {
     List findResult = await _service.findAll();
     _memoList = findResult.map((data) => Memo.fromJson(data)).toList();
