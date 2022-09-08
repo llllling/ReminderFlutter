@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:remainder_flutter/models/memo.dart';
 import 'package:remainder_flutter/services/memo_service.dart';
+import 'package:remainder_flutter/utils/index.dart';
 
 class MemoProvider with ChangeNotifier {
   final MemoService _service = MemoService();
@@ -34,5 +35,9 @@ class MemoProvider with ChangeNotifier {
 
   void close() {
     _service.close();
+  }
+
+  void downloadDBFile() {
+    dbExportToDownloadFolder(_service.getDBPath());
   }
 }

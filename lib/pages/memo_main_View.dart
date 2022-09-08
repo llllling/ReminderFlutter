@@ -10,7 +10,29 @@ class MemoMainView extends StatelessWidget {
   Widget build(BuildContext context) {
     final MemoProvider provider = Provider.of<MemoProvider>(context);
     return Scaffold(
-      appBar: AppBar(title: const Text('메모메모')),
+      appBar: AppBar(
+        title: const Text('메모메모'),
+        actions: [
+          IconButton(
+              onPressed: () {
+                provider.downloadDBFile();
+              },
+              icon: const Icon(
+                Icons.send_to_mobile,
+                color: Colors.white10,
+                size: 24.0,
+                semanticLabel: 'Text to announce in accessibility modes',
+              )),
+          IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                Icons.add,
+                color: Colors.white,
+                size: 24.0,
+                semanticLabel: 'Text to announce in accessibility modes',
+              ))
+        ],
+      ),
       body: const MemoList(),
     );
   }

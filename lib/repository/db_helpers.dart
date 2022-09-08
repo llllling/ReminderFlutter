@@ -19,7 +19,8 @@ class DBDto {
 class DBHelper {
   late Database _db;
   static final Map<String, DBHelper> _cache = <String, DBHelper>{};
-
+  late String _dbPath;
+  String get dbPath => _dbPath;
 //처음엔 값이 없으니까 생성, 두번째부턴 cache에 있으므로 생성된 거 반환
   factory DBHelper({Function? init}) {
     return _cache.putIfAbsent('singleton', () => DBHelper._internal(init!));
@@ -30,8 +31,8 @@ class DBHelper {
   }
 
   _open(Function onCreate) async {
-    String path = await getDatabasesPath();
-    _db = await openDatabase(join(path, 'memo_database.db'), version: 1,
+    _dbPath = await getDatabasesPath();
+    _db = await openDatabase(join(_dbPath, 'memo_database.db'), version: 1,
         onCreate: (Database db, int version) async {
       await onCreate(db);
     });
@@ -78,7 +79,7 @@ class DBHelper {
   Future<void> transction(Function queries, {Database? db}) async {
     await _database(db).transaction((txn) async {
       for (Function func in queries()) {
-        await func(db);
+        await func(txn);
       }
     });
   }
