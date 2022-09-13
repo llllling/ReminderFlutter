@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:remainder_flutter/widgets/common/custom_error.dart';
 import 'package:remainder_flutter/pages/memo_main_view.dart';
 import 'package:remainder_flutter/providers/memo_provider.dart';
 import 'package:remainder_flutter/providers/repeat_cycle_provider.dart';
@@ -20,20 +19,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MultiProvider(
-        providers: [
-          ChangeNotifierProvider(create: (_) => MemoProvider()),
-          ChangeNotifierProvider(create: (_) => RepeatCycleProvider())
-        ],
-        child: const MemoMainView(),
-      ),
-      builder: (BuildContext context, Widget? widget) {
-        ErrorWidget.builder = (FlutterErrorDetails errorDetails) {
-          return CustomError(errorDetails: errorDetails);
-        };
-
-        return widget!;
-      },
+      home: MultiProvider(providers: [
+        ChangeNotifierProvider(create: (_) => MemoProvider()),
+        ChangeNotifierProvider(create: (_) => RepeatCycleProvider()),
+      ], child: const MemoMainView()),
     );
   }
 }

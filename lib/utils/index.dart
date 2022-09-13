@@ -1,34 +1,27 @@
 import 'dart:io';
 
-Future<void> check(String dbPath) async {
-  int d = dbPath.indexOf('memo');
-  final dir = Directory(dbPath.substring(dbPath.indexOf('memo')));
+import 'package:remainder_flutter/widgets/common/error_snackbar.dart';
 
-  ///여기 오류남 ! 확인해라
-
+check(String dbPath) async {
   try {
-    var dirList = dir.list();
+    Stream<FileSystemEntity> dirList = Directory(dbPath).list();
+
     await for (final FileSystemEntity f in dirList) {
-      if (f is File) {
-        print('Found file ${f.path}');
-      } else if (f is Directory) {
-        print('Found dir ${f.path}');
-      }
+      print('Found file ${f.path}');
+      return f.path;
     }
   } catch (e) {
     print(e.toString());
+    // throw ErrorSnackbar(e.toString());
   }
 }
 
 Future<File> _localFile(String dbPath) async {
-  await check(dbPath);
-  return File(dbPath);
+  String filePath = await check(dbPath);
+  return File(filePath);
 }
 
 Future<void> dbExportToDownloadFolder(dbPath) async {
-  String newPath = '/storage/emulated/0/Download';
-
   File originFile = await _localFile(dbPath);
-
-  await originFile.copy(newPath);
+  await originFile.copy('/storage/emulated/0/Download/memo.db');
 }
