@@ -2,7 +2,7 @@ import 'dart:io';
 
 Future<String> _getFileName(String dbPath) async {
   final directory = Directory(dbPath);
-  await for (final f in directory.list(recursive: true, followLinks: false)) {
+  await for (final f in directory.list()) {
     print('Found file ${f.path}');
     return f.path;
   }

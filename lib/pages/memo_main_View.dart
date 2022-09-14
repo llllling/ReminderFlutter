@@ -2,10 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:remainder_flutter/providers/memo_provider.dart';
 import 'package:remainder_flutter/utils/index.dart';
+import 'package:remainder_flutter/widgets/memo_main_view/memo_add_modal.dart';
 import 'package:remainder_flutter/widgets/memo_main_view/memo_list.dart';
 
 class MemoMainView extends StatelessWidget {
   const MemoMainView({Key? key}) : super(key: key);
+
+  void addMemoOnPressed(BuildContext context) {
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (context) {
+        return const MemoAddModal();
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +35,9 @@ class MemoMainView extends StatelessWidget {
                 semanticLabel: 'Text to announce in accessibility modes',
               )),
           IconButton(
-              onPressed: () {},
+              onPressed: () {
+                addMemoOnPressed(context);
+              },
               icon: const Icon(
                 Icons.add,
                 color: Colors.white,
