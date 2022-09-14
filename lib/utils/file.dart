@@ -1,11 +1,12 @@
 import 'dart:io';
 
 Future<String> _getFileName(String dbPath) async {
-  Stream<FileSystemEntity> dirList = Directory(dbPath).list();
-  await for (final FileSystemEntity f in dirList) {
+  final directory = Directory(dbPath);
+  await for (final f in directory.list(recursive: true, followLinks: false)) {
     print('Found file ${f.path}');
     return f.path;
   }
+
   return '';
 }
 

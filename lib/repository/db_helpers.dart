@@ -34,44 +34,48 @@ class DBHelper {
     _dbPath = await getDatabasesPath();
     _db = await openDatabase(join(_dbPath, 'memo_database.db'), version: 1,
         onCreate: (Database db, int version) async {
-      // await onCreate(db);
-      db.execute(
-          'CREATE TABLE repeat_cycle (code TEXT PRIMARY KEY, name TEXT)');
+      await onCreate(db);
     });
+  }
+
+  DatabaseExecutor _databaseExct(DatabaseExecutor? db) {
+    return db ?? _db;
   }
 
   Database _database(Database? db) {
     return db ?? _db;
   }
 
-  Future<void> rawQueryExecute(DBDto dto, {Database? db}) async {
-    await _database(db).execute(dto.queryString!);
+  Future<void> rawQueryExecute(DBDto dto, {DatabaseExecutor? db}) async {
+    await _databaseExct(db).execute(dto.queryString!);
   }
 
-  Future<List<Map<String, Object?>>> findAll(DBDto dto, {Database? db}) async {
-    return _database(db).query(dto.tableName!);
+  Future<List<Map<String, Object?>>> findAll(DBDto dto,
+      {DatabaseExecutor? db}) async {
+    return _databaseExct(db).query(dto.tableName!);
   }
 
-  Future<List<Map<String, Object?>>> find(DBDto dto, {Database? db}) async {
-    return _database(db).query(dto.tableName!,
+  Future<List<Map<String, Object?>>> find(DBDto dto,
+      {DatabaseExecutor? db}) async {
+    return _databaseExct(db).query(dto.tableName!,
         where: dto.where?.reduce((value, element) => value += '$element = ? '),
         whereArgs: dto.whereArgs);
   }
 
-  Future<int> modify(DBDto dto, {Database? db}) {
-    return _database(db).update(dto.tableName!, dto.data!,
+  Future<int> modify(DBDto dto, {DatabaseExecutor? db}) {
+    return _databaseExct(db).update(dto.tableName!, dto.data!,
         where: dto.where?.reduce((value, element) => value += '$element = ? '),
         whereArgs: dto.whereArgs);
   }
 
-  Future<int> remove(DBDto dto, {Database? db}) {
-    return _database(db).delete(dto.tableName!,
+  Future<int> remove(DBDto dto, {DatabaseExecutor? db}) {
+    return _databaseExct(db).delete(dto.tableName!,
         where: dto.where?.reduce((value, element) => value += '$element = ? '),
         whereArgs: dto.whereArgs);
   }
 
-  Future<int> save(DBDto dto, {Database? db}) {
-    return _database(db).insert(dto.tableName!, dto.data!);
+  Future<int> save(DBDto dto, {DatabaseExecutor? db}) {
+    return _databaseExct(db).insert(dto.tableName!, dto.data!);
   }
 
   Future<void> close({Database? db}) async {
@@ -80,8 +84,8 @@ class DBHelper {
 
   Future<void> transction(Function queries, {Database? db}) async {
     await _database(db).transaction((txn) async {
-      for (Function func in queries()) {
-        await func(txn);
+      for (Function func in queries(txn)) {
+        await func();
       }
     });
   }
