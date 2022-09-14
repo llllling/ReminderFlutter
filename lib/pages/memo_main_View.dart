@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:remainder_flutter/providers/memo_provider.dart';
+import 'package:remainder_flutter/utils/index.dart';
 import 'package:remainder_flutter/widgets/memo_main_view/memo_list.dart';
 
 class MemoMainView extends StatelessWidget {
@@ -15,7 +16,7 @@ class MemoMainView extends StatelessWidget {
         actions: [
           IconButton(
               onPressed: () {
-                provider.downloadDBFile();
+                provider.downloadDBFile(showSnack(context));
               },
               icon: const Icon(
                 Icons.send_to_mobile,

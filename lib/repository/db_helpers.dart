@@ -34,7 +34,9 @@ class DBHelper {
     _dbPath = await getDatabasesPath();
     _db = await openDatabase(join(_dbPath, 'memo_database.db'), version: 1,
         onCreate: (Database db, int version) async {
-      await onCreate(db);
+      // await onCreate(db);
+      db.execute(
+          'CREATE TABLE repeat_cycle (code TEXT PRIMARY KEY, name TEXT)');
     });
   }
 
