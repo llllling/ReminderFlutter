@@ -6,12 +6,12 @@ class MemoAddModal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).viewInsets.bottom + 300;
-    print(height);
-    return SizedBox(
-      height: height,
+    return Container(
+      color: Colors.transparent,
       child: Column(
-        children: const [ContentTextField()],
+        children: const [
+          ContentTextField(),
+        ],
       ),
     );
   }

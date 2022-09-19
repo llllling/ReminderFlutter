@@ -10,7 +10,7 @@ class MemoListCard extends StatelessWidget {
     return GestureDetector(
         child: Card(
             child: ListTile(
-      title: Text(data.content),
+      title: Text(data.content!),
       subtitle: Text('${data.noticeDate} ${data.repeat}'),
       trailing: ElevatedButton(
         onPressed: () {},

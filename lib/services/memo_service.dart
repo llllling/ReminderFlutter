@@ -53,7 +53,7 @@ class MemoService {
         tableName: tableName,
         data: memo.toJson(),
         where: ['id'],
-        whereArgs: [memo.id]));
+        whereArgs: [memo.id!]));
   }
 
   void close() {
