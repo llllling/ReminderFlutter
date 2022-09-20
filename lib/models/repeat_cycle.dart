@@ -2,6 +2,9 @@ class RepeatCycle {
   final String _code;
   final String _name;
 
+  String get code => _code;
+  String get name => _name;
+
   RepeatCycle(this._code, this._name);
 
   factory RepeatCycle.fromJson(Map<String, Object?> json) =>
