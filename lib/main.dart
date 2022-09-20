@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:remainder_flutter/pages/memo_main_view.dart';
 import 'package:remainder_flutter/providers/memo_list_provider.dart';
@@ -19,6 +20,14 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('ko', 'KR'),
+      ],
       home: MultiProvider(providers: [
         ChangeNotifierProvider(create: (_) => MemoListProvider()),
         ChangeNotifierProvider(create: (_) => RepeatCycleProvider()),

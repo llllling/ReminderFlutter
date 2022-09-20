@@ -8,8 +8,6 @@ import 'package:provider/provider.dart';
 import 'package:remainder_flutter/providers/memo_provider.dart';
 
 class DateAndTimePicker extends StatelessWidget {
-  final DateTime dateTime = DateTime.now();
-
   DateAndTimePicker({super.key});
 
   void _showDemoPicker({
@@ -31,6 +29,9 @@ class DateAndTimePicker extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final MemoProvider provider = Provider.of<MemoProvider>(context);
+    final DateTime dateTime = provider.memo.noticeDate!.isNotEmpty
+        ? DateTime.parse(provider.memo.noticeDate!)
+        : DateTime.now();
     return MouseRegion(
       cursor: SystemMouseCursors.click,
       child: GestureDetector(
@@ -56,7 +57,7 @@ class DateAndTimePicker extends StatelessWidget {
             const Text('날짜 및 시간'),
             Flexible(
               child: Text(
-                DateFormat.yMMMd().add_jm().format(dateTime),
+                DateFormat('yyyy-MM-dd kk:mm').format(dateTime),
                 style: const TextStyle(color: CupertinoColors.inactiveGray),
               ),
             ),
