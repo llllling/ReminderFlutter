@@ -11,5 +11,6 @@ class MemoProvider with ChangeNotifier {
 
   modifyMemoProperty(String modifyObj, String modifyValue) {
     _memo.setMemo(modifyObj, modifyValue);
+    notifyListeners();
   }
 }

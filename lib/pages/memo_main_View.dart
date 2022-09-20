@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:remainder_flutter/pages/memo_add_modal.dart';
 import 'package:remainder_flutter/providers/memo_list_provider.dart';
 import 'package:remainder_flutter/providers/memo_provider.dart';
 import 'package:remainder_flutter/utils/index.dart';
-import 'package:remainder_flutter/widgets/memo_main_view/memo_add_modal.dart';
 import 'package:remainder_flutter/widgets/memo_main_view/memo_list.dart';
 
 class MemoMainView extends StatelessWidget {
@@ -14,9 +14,14 @@ class MemoMainView extends StatelessWidget {
       context: context,
       builder: (context) {
         return ChangeNotifierProvider(
-            create: (_) => MemoProvider(), child: const MemoAddModal());
+            create: (_) => MemoProvider(),
+            child: MemoAddModal(closeModalFunc: _closeAddMemoModal));
       },
     );
+  }
+
+  void _closeAddMemoModal(BuildContext context) {
+    Navigator.pop(context);
   }
 
   @override
