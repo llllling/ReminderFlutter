@@ -1,28 +1,27 @@
+import 'package:remainder_flutter/models/repeat_cycle.dart';
+
 class Memo {
   int? id;
   String? content;
   String? noticeDate;
-  String? repeat;
+  RepeatCycle? repeat;
 
-  Memo([this.id, this.content, this.noticeDate, this.repeat]);
-
-  Memo.saveForm(
-      {required this.content, required this.noticeDate, required this.repeat});
+  Memo({this.id, this.content = '', this.noticeDate = '', this.repeat});
 
   factory Memo.fromJson(Map<String, Object?> json) => Memo(
-      int.parse(json['id'].toString()),
-      json['content'].toString(),
-      json['noticeDate'].toString(),
-      json['reapeat'].toString());
+      id: int.parse(json['id'].toString()),
+      content: json['content'].toString(),
+      noticeDate: json['noticeDate'].toString(),
+      repeat: RepeatCycle.fromJson(json));
 
   Map<String, Object> toJson() => {
         'id': id!,
         'content': content!,
         'noticeDate': noticeDate!,
-        'noticeTime': repeat!,
+        'noticeTime': repeat!.name,
       };
 
-  setMemo(String propertyName, dynamic value) {
+  setProperty(String propertyName, dynamic value) {
     switch (propertyName) {
       case 'content':
         content = value;

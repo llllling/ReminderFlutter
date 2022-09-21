@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:remainder_flutter/providers/memo_provider.dart';
 
 class ContentTextField extends StatelessWidget {
-  const ContentTextField({super.key});
-
+  const ContentTextField({super.key, required this.provider});
+  final MemoProvider provider;
   @override
   Widget build(BuildContext context) {
-    final MemoProvider provider = Provider.of<MemoProvider>(context);
     return TextField(
       onChanged: (value) {
-        provider.modifyMemoProperty('content', value);
+        provider.setContent(value);
       },
       decoration: const InputDecoration(
         border: OutlineInputBorder(),

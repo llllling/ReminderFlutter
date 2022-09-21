@@ -10,7 +10,7 @@ class ModalButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoButton.filled(
-      onPressed: onPressed(),
+      onPressed: () => onPressed(),
       child: Text(buttonText),
     );
   }
