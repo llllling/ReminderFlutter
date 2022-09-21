@@ -16,8 +16,7 @@ class MemoAddModal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final MemoProvider memoProvider =
-        Provider.of<MemoProvider>(context, listen: false);
+    final MemoProvider memoProvider = Provider.of<MemoProvider>(context);
     final MemoListProvider memoListProvider =
         Provider.of<MemoListProvider>(context, listen: false);
     return Container(
