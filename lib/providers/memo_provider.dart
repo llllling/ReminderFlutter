@@ -11,12 +11,6 @@ class MemoProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  getContent() => memo.content;
-  getNoticeDate() => memo.noticeDate;
-  getRepeat() => memo.repeat;
-  getRepeatName() => memo.repeat?.name ?? '';
-  getRepeatCode() => memo.repeat?.code;
-
   void setContent(String newValue) {
     _modifyMemoProperty('content', newValue);
   }

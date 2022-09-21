@@ -16,13 +16,13 @@ class RepeatPicker extends StatelessWidget {
               childWhenClick: RepeatList(
                 repeatChange: (value) => {provider.setRepeat(value)},
                 repeatCycleList: state.repeatCycleList,
-                selected: provider.getRepeat(),
+                selected: provider.memo.repeat,
               ),
               children: [
                 const Text('반복 주기'),
                 Flexible(
                   child: Text(
-                    provider.getRepeatName(),
+                    provider.memo.repeat!.name,
                     style: const TextStyle(color: CupertinoColors.inactiveGray),
                   ),
                 ),
