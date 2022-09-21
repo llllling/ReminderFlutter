@@ -1,14 +1,11 @@
 class RepeatCycle {
-  final String _code;
-  final String _name;
+  final String code;
+  final String name;
 
-  String get code => _code;
-  String get name => _name;
-
-  RepeatCycle(this._code, this._name);
+  RepeatCycle(this.code, this.name);
 
   factory RepeatCycle.fromJson(Map<String, Object?> json) =>
       RepeatCycle(json['code'].toString(), json['name'].toString());
 
-  Map<String, Object> toJson() => {'code': _code, 'name': _name};
+  Map<String, Object> toJson() => {'code': code, 'name': name};
 }

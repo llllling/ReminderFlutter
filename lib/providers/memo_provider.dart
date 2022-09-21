@@ -2,15 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:remainder_flutter/models/memo.dart';
 
 class MemoProvider with ChangeNotifier {
-  late Memo _memo = Memo();
-  Memo get memo => _memo;
-
-  set setMemo(Memo memo) {
-    _memo = memo;
-  }
+  Memo memo = Memo();
 
   modifyMemoProperty(String modifyObj, String modifyValue) {
-    _memo.setMemo(modifyObj, modifyValue);
+    memo = Memo();
+    memo.setMemo(modifyObj, modifyValue);
     notifyListeners();
   }
 }
