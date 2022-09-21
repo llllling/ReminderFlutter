@@ -9,6 +9,7 @@ class ListForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
+      padding: EdgeInsets.zero,
       children: list.map<Widget>((data) => children(data)).toList(),
     );
   }

@@ -22,6 +22,9 @@ class MemoAddModal extends StatelessWidget {
           const ContentTextField(),
           const DateAndTimePicker(),
           const RepeatPicker(),
+          const SizedBox(
+            height: 30,
+          ),
           Row(children: [
             Expanded(
                 child: ModalButton(buttonText: '저장', onPressed: () => onSave)),

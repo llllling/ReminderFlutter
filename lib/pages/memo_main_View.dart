@@ -15,12 +15,13 @@ class MemoMainView extends StatelessWidget {
       builder: (context) {
         return ChangeNotifierProvider(
             create: (_) => MemoProvider(),
-            child: MemoAddModal(closeModalFunc: _closeAddMemoModal));
+            child: MemoAddModal(
+                closeModalFunc: () => _closeAddMemoModal(context)));
       },
     );
   }
 
-  void _closeAddMemoModal(BuildContext context) {
+  _closeAddMemoModal(BuildContext context) {
     Navigator.pop(context);
   }
 

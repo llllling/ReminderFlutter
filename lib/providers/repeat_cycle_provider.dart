@@ -7,6 +7,10 @@ class RepeatCycleProvider with ChangeNotifier {
   List<RepeatCycle> _repeatCycleList = [RepeatCycle('test', '안함')];
   List<RepeatCycle> get repeatCycleList => _repeatCycleList;
 
+  RepeatCycleProvider() {
+    findRepeatCycle();
+  }
+
   void findRepeatCycle() async {
     List findResult = await _service.findAll();
     _repeatCycleList =

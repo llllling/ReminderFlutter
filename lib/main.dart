@@ -3,7 +3,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:remainder_flutter/pages/memo_main_view.dart';
 import 'package:remainder_flutter/providers/memo_list_provider.dart';
-import 'package:remainder_flutter/providers/repeat_cycle_provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +17,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          primarySwatch: Colors.blueGrey,
         ),
         localizationsDelegates: const [
           GlobalMaterialLocalizations.delegate,

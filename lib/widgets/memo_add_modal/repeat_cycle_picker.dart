@@ -16,7 +16,9 @@ class RepeatPicker extends StatelessWidget {
     return AddModalMenu(
       childWhenClick: ChangeNotifierProvider(
         create: (_) => RepeatCycleProvider(),
-        child: const RepeatList(),
+        child: const RepeatList(
+          selected: 'none',
+        ),
       ),
       children: [
         const Text('반복 주기'),
