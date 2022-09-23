@@ -12,6 +12,8 @@ class MemoList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<MemoListProvider>(
         builder: (context, state, child) => ListForm(
-            list: state.memoList, children: (Memo data) => MemoListCard(data)));
+            list: state.memoList,
+            children: (Memo memo) =>
+                MemoListCard(memo, onDelete: (id) => state.removeMemo(id))));
   }
 }

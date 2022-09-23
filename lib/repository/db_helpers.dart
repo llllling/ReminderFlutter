@@ -73,9 +73,10 @@ class DBHelper {
   }
 
   Future<int> remove(DBDto dto, {DatabaseExecutor? db}) {
-    return _databaseExct(db).delete(dto.tableName!,
-        where: dto.where?.reduce((value, element) => value += '$element = ? '),
-        whereArgs: dto.whereArgs);
+    String? where =
+        dto.where?.fold('', (value, element) => value = '$value $element = ? ');
+    return _databaseExct(db)
+        .delete(dto.tableName!, where: where, whereArgs: dto.whereArgs);
   }
 
   Future<int> save(DBDto dto, {DatabaseExecutor? db}) {
