@@ -62,7 +62,8 @@ class DBHelper {
   Future<List<Map<String, Object?>>> find(DBDto dto,
       {DatabaseExecutor? db}) async {
     return _databaseExct(db).query(dto.tableName!,
-        where: dto.where?.reduce((value, element) => value += '$element = ? '),
+        where: dto.where
+            ?.fold('', (value, element) => value = '$value $element = ? '),
         whereArgs: dto.whereArgs);
   }
 
