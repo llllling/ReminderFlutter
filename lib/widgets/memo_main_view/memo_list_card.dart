@@ -19,7 +19,10 @@ class MemoListCard extends StatelessWidget {
       title: Text(data.content!),
       subtitle: Text(subTitle),
       trailing: ElevatedButton(
-        onPressed: () {},
+        // style: ElevatedButton.styleFrom(fixedSize: Size(3, 3)),
+        onPressed: () {
+          showAddMemoModal(context, data, 'modify');
+        },
         child: const Icon(
           Icons.edit_note,
         ),

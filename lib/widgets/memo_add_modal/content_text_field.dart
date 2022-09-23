@@ -6,7 +6,8 @@ class ContentTextField extends StatelessWidget {
   final MemoProvider provider;
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
+      initialValue: provider.memo.content,
       onChanged: (value) {
         provider.setContent(value);
       },
