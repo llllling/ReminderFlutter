@@ -36,7 +36,9 @@ class MemoService {
   }
 
   Future<List<Map<String, Object?>>> findAll() async {
-    return dbHelper.findAll(DBDto(tableName: tableName));
+    return dbHelper.rawQueryForSelect(DBDto(
+        queryString:
+            ' SELECT mm.content, mm.id , mm.noticeDate, rc.code, rc.name FROM memo mm INNER JOIN repeat_cycle rc ON mm.repeat = rc.code'));
   }
 
   Future<int> save(Memo memo) async {

@@ -45,8 +45,13 @@ class DBHelper {
     return execDb ?? db;
   }
 
-  Future<void> rawQueryExecute(DBDto dto, {DatabaseExecutor? db}) async {
+  Future rawQueryExecute(DBDto dto, {DatabaseExecutor? db}) async {
     await _databaseExct(db).execute(dto.queryString!);
+  }
+
+  Future<List<Map<String, Object?>>> rawQueryForSelect(DBDto dto,
+      {DatabaseExecutor? db}) async {
+    return _databaseExct(db).rawQuery(dto.queryString!);
   }
 
   Future<List<Map<String, Object?>>> findAll(DBDto dto,

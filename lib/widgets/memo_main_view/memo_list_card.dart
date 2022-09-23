@@ -1,27 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:remainder_flutter/models/memo.dart';
 import 'package:remainder_flutter/utils/index.dart';
+import 'package:remainder_flutter/widgets/memo_main_view/list_tile_subtitle.dart';
 
 class MemoListCard extends StatelessWidget {
-  final Memo data;
-  const MemoListCard(this.data, {Key? key}) : super(key: key);
+  const MemoListCard(this.memo, {Key? key}) : super(key: key);
+  final Memo memo;
 
   @override
   Widget build(BuildContext context) {
-    String subTitle = '${data.repeat!.name!} ';
-    if (data.noticeDate!.isNotEmpty) {
-      subTitle += formatDate(stringToDate(data.noticeDate!));
-    }
-
     return GestureDetector(
         child: Card(
             child: ListTile(
-      title: Text(data.content!),
-      subtitle: Text(subTitle),
+      title: Text(memo.content!),
+      subtitle: ListTileSubTitle(memo),
       trailing: ElevatedButton(
         // style: ElevatedButton.styleFrom(fixedSize: Size(3, 3)),
         onPressed: () {
-          showAddMemoModal(context, data, 'modify');
+          showAddMemoModal(context, memo, 'modify');
         },
         child: const Icon(
           Icons.edit_note,
