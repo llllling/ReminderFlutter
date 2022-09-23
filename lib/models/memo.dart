@@ -18,7 +18,13 @@ class Memo {
         'id': id!,
         'content': content!,
         'noticeDate': noticeDate!,
-        'noticeTime': repeat!.name,
+        'repeat': repeat!.name,
+      };
+
+  Map<String, Object> toSaveJson() => {
+        'content': content!,
+        'noticeDate': noticeDate!,
+        'repeat': repeat!.name,
       };
 
   setProperty(String propertyName, dynamic value) {

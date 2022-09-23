@@ -31,8 +31,8 @@ Future<void> dbExportToDownloadFolder(
       throw 'memo db 존재하지 않습니다.';
     }
     File(originFilePath).copy(copyFilePath);
-    _existFileRemove(originFilePath); //db삭제
-    _existFileRemove('$originFilePath-journal'); //db삭제
+    // _existFileRemove(originFilePath); //db삭제
+    // _existFileRemove('$originFilePath-journal'); //db삭제
   } catch (err) {
     errorWidget(err);
   }

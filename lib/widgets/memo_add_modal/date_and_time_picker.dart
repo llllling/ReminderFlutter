@@ -9,13 +9,14 @@ class DateAndTimePicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    DateTime dateTime = DateTime.parse(provider.memo.noticeDate!);
+    String noticeDate = provider.memo.noticeDate!;
 
     return AddModalMenu(
       childWhenClick: CupertinoDatePicker(
         backgroundColor: CupertinoColors.systemBackground.resolveFrom(context),
         mode: CupertinoDatePickerMode.dateAndTime,
-        initialDateTime: dateTime,
+        initialDateTime:
+            noticeDate.isNotEmpty ? DateTime.parse(noticeDate) : DateTime.now(),
         onDateTimeChanged: (newDateTime) {
           provider.setNoticeDate(newDateTime.toString());
         },
@@ -24,7 +25,10 @@ class DateAndTimePicker extends StatelessWidget {
         const Text('날짜 및 시간'),
         Flexible(
           child: Text(
-            DateFormat('yyyy-MM-dd kk:mm').format(dateTime),
+            noticeDate.isNotEmpty
+                ? DateFormat('yyyy-MM-dd kk:mm')
+                    .format(DateTime.parse(noticeDate))
+                : noticeDate,
             style: const TextStyle(color: CupertinoColors.inactiveGray),
           ),
         ),

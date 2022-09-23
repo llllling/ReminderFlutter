@@ -26,8 +26,7 @@ class MemoMainView extends StatelessWidget {
                   final repeat = repeatProvider.repeatCycleList.isNotEmpty
                       ? repeatProvider.repeatCycleList[0]
                       : null;
-                  return MemoProvider(Memo(
-                      noticeDate: DateTime.now().toString(), repeat: repeat));
+                  return MemoProvider(Memo(noticeDate: '', repeat: repeat));
                 },
               ),
             ],

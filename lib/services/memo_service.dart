@@ -40,7 +40,7 @@ class MemoService {
   }
 
   Future<int> save(Memo memo) async {
-    return dbHelper.save(DBDto(tableName: tableName, data: memo.toJson()));
+    return dbHelper.save(DBDto(tableName: tableName, data: memo.toSaveJson()));
   }
 
   Future<int> remove(int id) async {
