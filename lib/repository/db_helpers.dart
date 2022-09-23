@@ -68,15 +68,16 @@ class DBHelper {
 
   Future<int> modify(DBDto dto, {DatabaseExecutor? db}) {
     return _databaseExct(db).update(dto.tableName!, dto.data!,
-        where: dto.where?.reduce((value, element) => value += '$element = ? '),
+        where: dto.where
+            ?.fold('', (value, element) => value = '$value $element = ? '),
         whereArgs: dto.whereArgs);
   }
 
   Future<int> remove(DBDto dto, {DatabaseExecutor? db}) {
-    String? where =
-        dto.where?.fold('', (value, element) => value = '$value $element = ? ');
-    return _databaseExct(db)
-        .delete(dto.tableName!, where: where, whereArgs: dto.whereArgs);
+    return _databaseExct(db).delete(dto.tableName!,
+        where: dto.where
+            ?.fold('', (value, element) => value = '$value $element = ? '),
+        whereArgs: dto.whereArgs);
   }
 
   Future<int> save(DBDto dto, {DatabaseExecutor? db}) {
