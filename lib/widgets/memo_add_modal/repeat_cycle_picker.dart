@@ -22,7 +22,7 @@ class RepeatPicker extends StatelessWidget {
                 const Text('반복 주기'),
                 Flexible(
                   child: Text(
-                    provider.memo.repeat!.name,
+                    provider.memo.repeat?.name ?? '',
                     style: const TextStyle(color: CupertinoColors.inactiveGray),
                   ),
                 ),
