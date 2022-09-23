@@ -5,26 +5,29 @@ class Memo {
   String? content;
   String? noticeDate;
   RepeatCycle? repeat;
+  Memo();
 
-  Memo({this.id, this.content = '', this.noticeDate = '', this.repeat});
-
-  factory Memo.fromJson(Map<String, Object?> json) => Memo(
-      id: int.parse(json['id'].toString()),
-      content: json['content'].toString(),
-      noticeDate: json['noticeDate'].toString(),
-      repeat: RepeatCycle.fromJson(json));
+  factory Memo.fromJson(Map<String, Object?> json) {
+    Memo m = Memo();
+    m.id = int.parse(json['id'].toString());
+    m.content = json['content'] != null ? json['content'].toString() : '';
+    m.noticeDate =
+        json['noticeDate'] != null ? json['noticeDate'].toString() : '';
+    m.repeat = RepeatCycle.fromJson(json);
+    return m;
+  }
 
   Map<String, Object> toJson() => {
         'id': id!,
         'content': content!,
         'noticeDate': noticeDate!,
-        'repeat': repeat!.name,
+        'repeat': repeat!.code.toString(),
       };
 
   Map<String, Object> toSaveJson() => {
         'content': content!,
         'noticeDate': noticeDate!,
-        'repeat': repeat!.name,
+        'repeat': repeat!.code.toString(),
       };
 
   setProperty(String propertyName, dynamic value) {

@@ -29,7 +29,7 @@ class MemoService {
               () => dbHelper.rawQueryExecute(
                   DBDto(
                       queryString:
-                          'CREATE TABLE $tableName (id INTEGER PRIMARY KEY AUTOINCREMENT, content TEXT, noticeDate TEXT, repeat TEXT,  FOREIGN KEY(repeat) REFERENCES repeat_cycle(code) )'),
+                          'CREATE TABLE $tableName (id INTEGER PRIMARY KEY AUTOINCREMENT, content TEXT, noticeDate TEXT, repeat TEXT DEFAULT "none" NOT NULL,  FOREIGN KEY(repeat) REFERENCES repeat_cycle(code) )'),
                   db: txn)
             ],
         db: database);

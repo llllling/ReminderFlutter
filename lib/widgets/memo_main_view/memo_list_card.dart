@@ -11,7 +11,7 @@ class MemoListCard extends StatelessWidget {
         child: Card(
             child: ListTile(
       title: Text(data.content!),
-      subtitle: Text('${data.noticeDate} ${data.repeat}'),
+      subtitle: Text('${data.noticeDate} ${data.repeat!.name}'),
       trailing: ElevatedButton(
         onPressed: () {},
         child: const Icon(

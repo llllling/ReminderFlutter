@@ -11,22 +11,22 @@ class RepeatPicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<RepeatCycleProvider>(
-        builder: (context, state, child) => AddModalMenu(
-              childWhenClick: RepeatList(
-                repeatChange: (value) => {provider.setRepeat(value)},
-                repeatCycleList: state.repeatCycleList,
-                selected: provider.memo.repeat,
-              ),
-              children: [
-                const Text('반복 주기'),
-                Flexible(
-                  child: Text(
-                    provider.memo.repeat?.name ?? '',
-                    style: const TextStyle(color: CupertinoColors.inactiveGray),
-                  ),
-                ),
-              ],
-            ));
+    return AddModalMenu(
+      childWhenClick: ChangeNotifierProvider<RepeatCycleProvider>(
+          create: (_) => RepeatCycleProvider(),
+          child: RepeatList(
+            selected: provider.memo.repeat,
+            repeatChange: (value) => {provider.setRepeat(value)},
+          )),
+      children: [
+        const Text('반복 주기'),
+        Flexible(
+          child: Text(
+            provider.memo.repeat?.name ?? '',
+            style: const TextStyle(color: CupertinoColors.inactiveGray),
+          ),
+        ),
+      ],
+    );
   }
 }

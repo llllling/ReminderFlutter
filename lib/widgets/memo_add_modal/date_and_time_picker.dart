@@ -9,7 +9,7 @@ class DateAndTimePicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String noticeDate = provider.memo.noticeDate!;
+    String noticeDate = provider.memo.noticeDate ?? '';
 
     return AddModalMenu(
       childWhenClick: CupertinoDatePicker(

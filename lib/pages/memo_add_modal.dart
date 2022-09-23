@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
+import 'package:remainder_flutter/models/memo.dart';
 import 'package:remainder_flutter/providers/memo_list_provider.dart';
 import 'package:remainder_flutter/providers/memo_provider.dart';
 import 'package:remainder_flutter/widgets/common/modal_button.dart';
@@ -13,11 +14,11 @@ class MemoAddModal extends StatelessWidget {
   final Function closeModalFunc;
   final String type;
 
-  void onSave(BuildContext context, MemoProvider memoProvider,
-      MemoListProvider memoListProvider) {
+  void onSave(
+      BuildContext context, Memo memo, MemoListProvider memoListProvider) {
     type == 'add'
-        ? memoListProvider.saveMemo(memoProvider.memo!)
-        : memoListProvider.modifyMemo(memoProvider.memo!);
+        ? memoListProvider.saveMemo(memo)
+        : memoListProvider.modifyMemo(memo);
     Navigator.pop(context);
   }
 
@@ -43,7 +44,7 @@ class MemoAddModal extends StatelessWidget {
                 child: ModalButton(
                     buttonText: '저장',
                     onPressed: () =>
-                        onSave(context, memoProvider, memoListProvider))),
+                        onSave(context, memoProvider.memo, memoListProvider))),
             Expanded(
               child: ModalButton(
                 buttonText: '취소',

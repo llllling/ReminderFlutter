@@ -4,7 +4,6 @@ import 'package:remainder_flutter/models/memo.dart';
 import 'package:remainder_flutter/pages/memo_add_modal.dart';
 import 'package:remainder_flutter/providers/memo_list_provider.dart';
 import 'package:remainder_flutter/providers/memo_provider.dart';
-import 'package:remainder_flutter/providers/repeat_cycle_provider.dart';
 import 'package:remainder_flutter/utils/index.dart';
 import 'package:remainder_flutter/widgets/memo_main_view/memo_list.dart';
 
@@ -13,30 +12,14 @@ class MemoMainView extends StatelessWidget {
 
   void _showAddMemoModal(BuildContext context) {
     showModalBottomSheet<void>(
-      context: context,
-      builder: (context) {
-        return MultiProvider(
-            providers: [
-              ChangeNotifierProvider<RepeatCycleProvider>(
-                create: (_) => RepeatCycleProvider(),
-              ),
-              ChangeNotifierProxyProvider<RepeatCycleProvider, MemoProvider>(
-                create: (context) => MemoProvider(Memo()),
-                update: (context, repeatProvider, previous) {
-                  final repeat = repeatProvider.repeatCycleList.isNotEmpty
-                      ? repeatProvider.repeatCycleList[0]
-                      : null;
-                  return MemoProvider(Memo(noticeDate: '', repeat: repeat));
-                },
-              ),
-            ],
-            builder: (context, child) {
-              return MemoAddModal(
+        context: context,
+        builder: (context) {
+          return ChangeNotifierProvider<MemoProvider>(
+              create: (_) => MemoProvider(Memo()),
+              child: MemoAddModal(
                   type: 'add',
-                  closeModalFunc: () => _closeAddMemoModal(context));
-            });
-      },
-    );
+                  closeModalFunc: () => _closeAddMemoModal(context)));
+        });
   }
 
   _closeAddMemoModal(BuildContext context) {
