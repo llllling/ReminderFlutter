@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:remainder_flutter/models/memo.dart';
+import 'package:remainder_flutter/utils/index.dart';
 
 class MemoListCard extends StatelessWidget {
   final Memo data;
@@ -7,11 +8,16 @@ class MemoListCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String subTitle = '${data.repeat!.name!} ';
+    if (data.noticeDate!.isNotEmpty) {
+      subTitle += formatDate(stringToDate(data.noticeDate!));
+    }
+
     return GestureDetector(
         child: Card(
             child: ListTile(
       title: Text(data.content!),
-      subtitle: Text('${data.noticeDate} ${data.repeat!.name}'),
+      subtitle: Text(subTitle),
       trailing: ElevatedButton(
         onPressed: () {},
         child: const Icon(

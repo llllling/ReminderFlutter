@@ -2,8 +2,8 @@ import 'package:remainder_flutter/models/repeat_cycle.dart';
 
 class Memo {
   int? id;
-  String? content;
-  String? noticeDate;
+  String? content = '';
+  String? noticeDate = '';
   RepeatCycle? repeat;
   Memo();
 
@@ -24,11 +24,14 @@ class Memo {
         'repeat': repeat!.code.toString(),
       };
 
-  Map<String, Object> toSaveJson() => {
-        'content': content!,
-        'noticeDate': noticeDate!,
-        'repeat': repeat!.code.toString(),
-      };
+  Map<String, Object> toSaveJson() {
+    Map<String, Object> save = {
+      'content': content!,
+      'noticeDate': noticeDate!,
+    };
+    if (repeat != null) save['repeat'] = repeat!.code.toString();
+    return save;
+  }
 
   setProperty(String propertyName, dynamic value) {
     switch (propertyName) {

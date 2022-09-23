@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:intl/intl.dart';
 import 'package:remainder_flutter/providers/memo_provider.dart';
+import 'package:remainder_flutter/utils/index.dart';
 import 'package:remainder_flutter/widgets/common/add_modal_menu.dart';
 
 class DateAndTimePicker extends StatelessWidget {
@@ -15,8 +15,7 @@ class DateAndTimePicker extends StatelessWidget {
       childWhenClick: CupertinoDatePicker(
         backgroundColor: CupertinoColors.systemBackground.resolveFrom(context),
         mode: CupertinoDatePickerMode.dateAndTime,
-        initialDateTime:
-            noticeDate.isNotEmpty ? DateTime.parse(noticeDate) : DateTime.now(),
+        initialDateTime: stringToDate(noticeDate),
         onDateTimeChanged: (newDateTime) {
           provider.setNoticeDate(newDateTime.toString());
         },
@@ -26,8 +25,7 @@ class DateAndTimePicker extends StatelessWidget {
         Flexible(
           child: Text(
             noticeDate.isNotEmpty
-                ? DateFormat('yyyy-MM-dd kk:mm')
-                    .format(DateTime.parse(noticeDate))
+                ? formatDate(stringToDate(noticeDate))
                 : noticeDate,
             style: const TextStyle(color: CupertinoColors.inactiveGray),
           ),
