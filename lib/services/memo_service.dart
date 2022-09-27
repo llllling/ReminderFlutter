@@ -38,16 +38,17 @@ class MemoService {
   Future<List<Map<String, Object?>>> findAll() async {
     return dbHelper.rawQueryForSelect(DBDto(
         queryString:
-            ' SELECT mm.content, mm.id , mm.noticeDate, rc.code, rc.name FROM memo mm INNER JOIN repeat_cycle rc ON mm.repeat = rc.code'));
+            ' SELECT mm.content, mm.id , mm.noticeDate, rc.code, rc.name FROM memo mm INNER JOIN repeat_cycle rc ON mm.repeat = rc.code AND mm.is_remove = 0'));
   }
 
   Future<int> save(Memo memo) async {
     return dbHelper.save(DBDto(tableName: tableName, data: memo.toSaveJson()));
   }
 
-  Future<int> remove(int id) async {
-    return dbHelper
-        .remove(DBDto(tableName: tableName, where: ['id'], whereArgs: [id]));
+  Future<void> remove(int id) async {
+    return dbHelper.rawQueryExecute(
+      DBDto(queryString: 'UPDATE memo SET is_remove = 1 WHERE id = $id'),
+    );
   }
 
   Future<int> modify(Memo memo) async {
