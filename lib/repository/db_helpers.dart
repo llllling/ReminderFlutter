@@ -44,8 +44,8 @@ class DBHelper {
     return execDB ?? (await _open()) as T;
   }
 
-  create(Database dbInstance) {
-    transction(
+  create(Database dbInstance) async {
+    await transction(
         (txn) => DBConfig.initQuery.map((query) =>
             () => rawQueryExecute(DBDto(queryString: query), db: txn)),
         db: dbInstance);

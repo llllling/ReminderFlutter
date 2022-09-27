@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:remainder_flutter/models/memo.dart';
 import 'package:remainder_flutter/services/memo_service.dart';
-import 'package:remainder_flutter/utils/file.dart';
 
 class MemoListProvider with ChangeNotifier {
   final MemoService _service = MemoService();
   List<Memo> _memoList = [];
   List<Memo> get memoList => _memoList;
 
-  // MemoProvider() {
-  //   findMemoList();
-  // }
+  MemoListProvider() {
+    findMemoList();
+  }
 
   void findMemoList() async {
     List findResult = await _service.findAll();
@@ -35,9 +34,5 @@ class MemoListProvider with ChangeNotifier {
 
   void close() {
     _service.close();
-  }
-
-  void downloadDBFile(Function errorWidget) {
-    dbExportToDownloadFolder(_service.getDBPath(), errorWidget);
   }
 }

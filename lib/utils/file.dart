@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:sqflite/sqflite.dart';
+
 Future<String> _getFileName(String dbPath) async {
   final directory = Directory(dbPath);
   await for (final f in directory.list()) {
@@ -36,4 +38,9 @@ Future<void> dbExportToDownloadFolder(
   } catch (err) {
     errorWidget(err);
   }
+}
+
+void downloadDBFile(Function errorWidget) async {
+  String dbPath = await getDatabasesPath();
+  dbExportToDownloadFolder(dbPath, errorWidget);
 }
