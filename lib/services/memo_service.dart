@@ -2,37 +2,11 @@ import 'package:remainder_flutter/models/memo.dart';
 import 'package:remainder_flutter/repository/db_helpers.dart';
 
 class MemoService {
-  late final DBHelper dbHelper;
+  late final DBHelper dbHelper = DBHelper();
   final String tableName = 'memo';
-
-  MemoService() {
-    dbHelper = DBHelper(init: init);
-  }
 
   String getDBPath() {
     return dbHelper.dbPath;
-  }
-
-  Future<void> init(database) async {
-    dbHelper.transction(
-        (txn) => [
-              () => dbHelper.rawQueryExecute(
-                  DBDto(
-                      queryString:
-                          'CREATE TABLE repeat_cycle (code TEXT PRIMARY KEY, name TEXT)'),
-                  db: txn),
-              () => dbHelper.rawQueryExecute(
-                  DBDto(
-                      queryString:
-                          "INSERT INTO repeat_cycle(code, name) VALUES('none', '안함'), ('day', '매일'), ('week', '매주'), ('month', '매월')"),
-                  db: txn),
-              () => dbHelper.rawQueryExecute(
-                  DBDto(
-                      queryString:
-                          'CREATE TABLE $tableName (id INTEGER PRIMARY KEY AUTOINCREMENT, content TEXT, noticeDate TEXT, repeat TEXT DEFAULT "none" NOT NULL,  FOREIGN KEY(repeat) REFERENCES repeat_cycle(code) )'),
-                  db: txn)
-            ],
-        db: database);
   }
 
   Future<List<Map<String, Object?>>> findAll() async {
