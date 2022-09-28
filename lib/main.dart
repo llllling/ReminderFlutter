@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
         child: MaterialApp(
             title: 'Flutter Demo',
             theme: ThemeData(
-              primarySwatch: Colors.blueGrey,
+              primarySwatch: Colors.lime,
             ),
             localizationsDelegates: const [
               GlobalMaterialLocalizations.delegate,

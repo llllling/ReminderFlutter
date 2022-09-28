@@ -20,7 +20,10 @@ class MemoListProvider with ChangeNotifier {
 
   void saveMemo(Memo memo) async {
     await _service.save(memo);
-    memo.noticeDate!.isNotEmpty && notificationCreate(memo);
+    if (memo.noticeDate!.isNotEmpty) {
+      notificationCreate(memo);
+    }
+
     findMemoList();
   }
 

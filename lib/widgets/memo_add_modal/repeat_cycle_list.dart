@@ -17,17 +17,18 @@ class RepeatList extends StatelessWidget {
             list: state.repeatCycleList,
             children: (RepeatCycle data) => OutlinedButton(
                 style: OutlinedButton.styleFrom(
-                  backgroundColor: data.code == selected?.code
-                      ? Colors.blueGrey
-                      : Colors.white,
-                  foregroundColor: data.code == selected?.code
-                      ? Colors.white
-                      : Colors.blueGrey,
+                  backgroundColor:
+                      data.code == selected?.code ? Colors.lime : Colors.white,
+                  foregroundColor:
+                      data.code == selected?.code ? Colors.white : Colors.lime,
                 ),
                 onPressed: () {
                   repeatChange(data);
                   Navigator.pop(context);
                 },
-                child: Text(data.name.toString()))));
+                child: Text(
+                  data.name.toString(),
+                  style: const TextStyle(color: Colors.black),
+                ))));
   }
 }

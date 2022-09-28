@@ -38,7 +38,7 @@ _closeAddMemoModal(BuildContext context) {
   Navigator.pop(context);
 }
 
-notificationCreate(Memo memo) async {
+Future<void> notificationCreate(Memo memo) async {
   const AndroidInitializationSettings initializationSettingsAndroid =
       AndroidInitializationSettings('@mipmap/ic_launcher');
   InitializationSettings initializationSettings =

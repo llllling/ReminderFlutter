@@ -15,7 +15,7 @@ class MemoListCard extends StatelessWidget {
         onDoubleTap: () => onDelete(memo.id),
         child: Card(
             child: ListTile(
-          selectedTileColor: Colors.blueGrey,
+          selectedTileColor: Colors.lime,
           title: Text(memo.content!),
           subtitle: ListTileSubTitle(memo),
           trailing: TextButton(
