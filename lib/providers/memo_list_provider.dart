@@ -11,7 +11,7 @@ class MemoListProvider with ChangeNotifier {
   List<Memo> get memoList => _memoList;
 
   MemoListProvider() {
-    //  findMemoList();
+    findMemoList();
   }
 
   void findMemoList() async {

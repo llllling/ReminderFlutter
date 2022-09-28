@@ -1,4 +1,4 @@
-package com.example.remainder_flutter
+package com.example.memomemo
 
 import io.flutter.embedding.android.FlutterActivity
 
