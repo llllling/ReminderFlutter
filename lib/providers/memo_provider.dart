@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:remainder_flutter/models/memo.dart';
-import 'package:remainder_flutter/models/repeat_cycle.dart';
+import 'package:memomemo/models/memo.dart';
+import 'package:memomemo/models/repeat_cycle.dart';
 
 class MemoProvider with ChangeNotifier {
   Memo memo;

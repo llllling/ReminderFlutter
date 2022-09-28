@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
-import 'package:remainder_flutter/models/memo.dart';
-import 'package:remainder_flutter/providers/memo_list_provider.dart';
-import 'package:remainder_flutter/providers/memo_provider.dart';
-import 'package:remainder_flutter/widgets/common/modal_button.dart';
-import 'package:remainder_flutter/widgets/memo_add_modal/content_text_field.dart';
-import 'package:remainder_flutter/widgets/memo_add_modal/date_and_time_picker.dart';
-import 'package:remainder_flutter/widgets/memo_add_modal/repeat_cycle_picker.dart';
+import 'package:memomemo/models/memo.dart';
+import 'package:memomemo/providers/memo_list_provider.dart';
+import 'package:memomemo/providers/memo_provider.dart';
+import 'package:memomemo/widgets/common/modal_button.dart';
+import 'package:memomemo/widgets/memo_add_modal/content_text_field.dart';
+import 'package:memomemo/widgets/memo_add_modal/date_and_time_picker.dart';
+import 'package:memomemo/widgets/memo_add_modal/repeat_cycle_picker.dart';
 
 class MemoAddModal extends StatelessWidget {
   const MemoAddModal(

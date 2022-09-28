@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:remainder_flutter/models/memo.dart';
-import 'package:remainder_flutter/utils/index.dart';
+import 'package:memomemo/models/memo.dart';
+import 'package:memomemo/utils/index.dart';
 
 class ListTileSubTitle extends StatelessWidget {
   const ListTileSubTitle(

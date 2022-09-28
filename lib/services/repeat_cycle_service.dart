@@ -1,4 +1,4 @@
-import 'package:remainder_flutter/repository/db_helpers.dart';
+import 'package:memomemo/repository/db_helpers.dart';
 
 class RepeatCycleService {
   final DBHelper dbHelper = DBHelper();

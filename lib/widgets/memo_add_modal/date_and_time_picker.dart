@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
-import 'package:remainder_flutter/providers/memo_provider.dart';
-import 'package:remainder_flutter/utils/index.dart';
-import 'package:remainder_flutter/widgets/common/add_modal_menu.dart';
+import 'package:memomemo/providers/memo_provider.dart';
+import 'package:memomemo/utils/index.dart';
+import 'package:memomemo/widgets/common/add_modal_menu.dart';
 
 class DateAndTimePicker extends StatelessWidget {
   const DateAndTimePicker({super.key, required this.provider});

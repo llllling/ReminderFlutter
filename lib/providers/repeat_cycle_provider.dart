@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:remainder_flutter/models/repeat_cycle.dart';
-import 'package:remainder_flutter/services/repeat_cycle_service.dart';
+import 'package:memomemo/models/repeat_cycle.dart';
+import 'package:memomemo/services/repeat_cycle_service.dart';
 
 class RepeatCycleProvider with ChangeNotifier {
   final RepeatCycleService _service = RepeatCycleService();

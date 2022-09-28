@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:remainder_flutter/models/repeat_cycle.dart';
-import 'package:remainder_flutter/providers/repeat_cycle_provider.dart';
-import 'package:remainder_flutter/widgets/common/list_view.dart';
+import 'package:memomemo/models/repeat_cycle.dart';
+import 'package:memomemo/providers/repeat_cycle_provider.dart';
+import 'package:memomemo/widgets/common/list_view.dart';
 
 class RepeatList extends StatelessWidget {
   const RepeatList({Key? key, this.selected, required this.repeatChange})

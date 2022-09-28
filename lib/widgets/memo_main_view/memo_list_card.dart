@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:remainder_flutter/models/memo.dart';
-import 'package:remainder_flutter/utils/index.dart';
-import 'package:remainder_flutter/widgets/memo_main_view/list_tile_subtitle.dart';
+import 'package:memomemo/models/memo.dart';
+import 'package:memomemo/utils/index.dart';
+import 'package:memomemo/widgets/memo_main_view/list_tile_subtitle.dart';
 
 class MemoListCard extends StatelessWidget {
   const MemoListCard(this.memo, {Key? key, required this.onDelete})

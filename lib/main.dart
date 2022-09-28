@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
-import 'package:remainder_flutter/pages/memo_main_view.dart';
-import 'package:remainder_flutter/providers/memo_list_provider.dart';
+import 'package:memomemo/pages/memo_main_view.dart';
+import 'package:memomemo/providers/memo_list_provider.dart';
 
 void main() {
   runApp(const MyApp());

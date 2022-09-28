@@ -1,7 +1,9 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
-import 'package:remainder_flutter/models/memo.dart';
-import 'package:remainder_flutter/services/memo_service.dart';
-import 'package:remainder_flutter/utils/index.dart';
+import 'package:memomemo/models/memo.dart';
+import 'package:memomemo/services/memo_service.dart';
+import 'package:memomemo/utils/index.dart';
 
 class MemoListProvider with ChangeNotifier {
   final MemoService _service = MemoService();
@@ -9,7 +11,7 @@ class MemoListProvider with ChangeNotifier {
   List<Memo> get memoList => _memoList;
 
   MemoListProvider() {
-    findMemoList();
+    //  findMemoList();
   }
 
   void findMemoList() async {
@@ -19,21 +21,25 @@ class MemoListProvider with ChangeNotifier {
   }
 
   void saveMemo(Memo memo) async {
-    await _service.save(memo);
     if (memo.noticeDate!.isNotEmpty) {
-      notificationCreate(memo);
+      memo.notifyId = Random().nextInt(10000);
+      await notificationCreate(memo);
     }
-
+    await _service.save(memo);
     findMemoList();
   }
 
-  void removeMemo(int id) async {
-    await _service.remove(id);
+  void removeMemo(Memo memo) async {
+    await _service.remove(memo.id!);
+    if (memo.notifyId != null) {
+      await notificationRemove(memo.notifyId!);
+    }
     findMemoList();
   }
 
   void modifyMemo(Memo memo) async {
     await _service.modify(memo);
+
     findMemoList();
   }
 

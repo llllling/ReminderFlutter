@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:remainder_flutter/models/memo.dart';
-import 'package:remainder_flutter/utils/file.dart';
-import 'package:remainder_flutter/utils/index.dart';
-import 'package:remainder_flutter/widgets/memo_main_view/memo_list.dart';
+import 'package:memomemo/models/memo.dart';
+import 'package:memomemo/utils/file.dart';
+import 'package:memomemo/utils/index.dart';
+import 'package:memomemo/widgets/memo_main_view/memo_list.dart';
 
 class MemoMainView extends StatelessWidget {
   const MemoMainView({Key? key}) : super(key: key);

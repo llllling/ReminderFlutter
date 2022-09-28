@@ -1,5 +1,5 @@
-import 'package:remainder_flutter/models/memo.dart';
-import 'package:remainder_flutter/repository/db_helpers.dart';
+import 'package:memomemo/models/memo.dart';
+import 'package:memomemo/repository/db_helpers.dart';
 
 class MemoService {
   late final DBHelper dbHelper = DBHelper();
@@ -12,16 +12,18 @@ class MemoService {
   Future<List<Map<String, Object?>>> findAll() async {
     return dbHelper.rawQueryForSelect(DBDto(
         queryString:
-            ' SELECT mm.content, mm.id , mm.noticeDate, rc.code, rc.name FROM memo mm INNER JOIN repeat_cycle rc ON mm.repeat = rc.code AND mm.is_remove = 0 ORDER BY mm.id DESC'));
+            ' SELECT mm.content, mm.id , mm.noticeDate, mm.notify_id, rc.code, rc.name FROM memo mm INNER JOIN repeat_cycle rc ON mm.repeat = rc.code AND mm.is_remove = 0 ORDER BY mm.id DESC'));
   }
 
   Future<int> save(Memo memo) async {
-    return dbHelper.save(DBDto(tableName: tableName, data: memo.toSaveJson()));
+    return dbHelper.save(DBDto(tableName: tableName, data: memo.toJson()));
   }
 
   Future<void> remove(int id) async {
     return dbHelper.rawQueryExecute(
-      DBDto(queryString: 'UPDATE memo SET is_remove = 1 WHERE id = $id'),
+      DBDto(
+          queryString:
+              'UPDATE memo SET is_remove = 1, notify_id = null WHERE id = $id'),
     );
   }
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:remainder_flutter/providers/memo_provider.dart';
+import 'package:memomemo/providers/memo_provider.dart';
 
 class ContentTextField extends StatelessWidget {
   const ContentTextField({super.key, required this.provider});

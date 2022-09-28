@@ -1,12 +1,10 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:remainder_flutter/models/memo.dart';
-import 'package:remainder_flutter/pages/memo_add_modal.dart';
-import 'package:remainder_flutter/providers/memo_provider.dart';
+import 'package:memomemo/models/memo.dart';
+import 'package:memomemo/pages/memo_add_modal.dart';
+import 'package:memomemo/providers/memo_provider.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
@@ -46,13 +44,13 @@ Future<void> notificationCreate(Memo memo) async {
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
   flutterLocalNotificationsPlugin.initialize(initializationSettings);
-
   tz.initializeTimeZones();
+
   await flutterLocalNotificationsPlugin.zonedSchedule(
-      Random().nextInt(10000),
+      memo.notifyId!,
       '메모메모 알림왔숑 (๑•᎑<๑)ｰ☆',
       memo.content,
-      tz.TZDateTime.now(tz.local).add(const Duration(seconds: 5)),
+      tz.TZDateTime.from(DateTime.parse(memo.noticeDate!), tz.local),
       const NotificationDetails(
           android: AndroidNotificationDetails(
               'your channel id', 'your channel name',
@@ -60,4 +58,10 @@ Future<void> notificationCreate(Memo memo) async {
       androidAllowWhileIdle: true,
       uiLocalNotificationDateInterpretation:
           UILocalNotificationDateInterpretation.absoluteTime);
+}
+
+notificationRemove(int id) async {
+  final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+      FlutterLocalNotificationsPlugin();
+  await flutterLocalNotificationsPlugin.cancel(id);
 }
