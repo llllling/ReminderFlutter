@@ -12,7 +12,7 @@ class MemoService {
   Future<List<Map<String, Object?>>> findAll() async {
     return dbHelper.rawQueryForSelect(DBDto(
         queryString:
-            ' SELECT mm.content, mm.id , mm.noticeDate, mm.notify_id, rc.code, rc.name FROM memo mm INNER JOIN repeat_cycle rc ON mm.repeat = rc.code AND mm.is_remove = 0 ORDER BY mm.id DESC'));
+            ' SELECT mm.content, mm.id , mm.noticeDate, mm.notifyId, rc.code, rc.name FROM memo mm INNER JOIN repeat_cycle rc ON mm.repeat = rc.code AND mm.isRemove = 0 ORDER BY mm.id DESC'));
   }
 
   Future<int> save(Memo memo) async {
@@ -23,7 +23,7 @@ class MemoService {
     return dbHelper.rawQueryExecute(
       DBDto(
           queryString:
-              'UPDATE memo SET is_remove = 1, notify_id = null WHERE id = $id'),
+              'UPDATE memo SET isRemove = 1, notifyId = null WHERE id = $id'),
     );
   }
 

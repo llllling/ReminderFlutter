@@ -23,9 +23,11 @@ class MemoListProvider with ChangeNotifier {
   void saveMemo(Memo memo) async {
     if (memo.noticeDate!.isNotEmpty) {
       memo.notifyId = Random().nextInt(10000);
+      await _service.save(memo);
       await notificationCreate(memo);
+    } else {
+      await _service.save(memo);
     }
-    await _service.save(memo);
     findMemoList();
   }
 

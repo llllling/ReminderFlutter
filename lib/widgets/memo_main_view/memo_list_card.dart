@@ -12,7 +12,7 @@ class MemoListCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onDoubleTap: () => onDelete(memo.id),
+        onDoubleTap: () => onDelete(memo),
         child: Card(
             child: ListTile(
           selectedTileColor: Colors.lime,
