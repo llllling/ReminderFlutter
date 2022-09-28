@@ -1,8 +1,14 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:remainder_flutter/models/memo.dart';
 import 'package:remainder_flutter/pages/memo_add_modal.dart';
 import 'package:remainder_flutter/providers/memo_provider.dart';
+import 'package:timezone/data/latest_all.dart' as tz;
+import 'package:timezone/timezone.dart' as tz;
 
 showSnack(BuildContext context) => (String message) {
       ScaffoldMessenger.of(context)
@@ -30,4 +36,28 @@ void showAddMemoModal(BuildContext context, dynamic obj, String type) {
 
 _closeAddMemoModal(BuildContext context) {
   Navigator.pop(context);
+}
+
+notificationCreate(Memo memo) async {
+  const AndroidInitializationSettings initializationSettingsAndroid =
+      AndroidInitializationSettings('@mipmap/ic_launcher');
+  InitializationSettings initializationSettings =
+      const InitializationSettings(android: initializationSettingsAndroid);
+  final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+      FlutterLocalNotificationsPlugin();
+  flutterLocalNotificationsPlugin.initialize(initializationSettings);
+
+  tz.initializeTimeZones();
+  await flutterLocalNotificationsPlugin.zonedSchedule(
+      Random().nextInt(10000),
+      '메모메모 알림왔숑 (๑•᎑<๑)ｰ☆',
+      memo.content,
+      tz.TZDateTime.now(tz.local).add(const Duration(seconds: 5)),
+      const NotificationDetails(
+          android: AndroidNotificationDetails(
+              'your channel id', 'your channel name',
+              channelDescription: 'your channel description')),
+      androidAllowWhileIdle: true,
+      uiLocalNotificationDateInterpretation:
+          UILocalNotificationDateInterpretation.absoluteTime);
 }

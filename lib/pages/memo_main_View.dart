@@ -11,7 +11,7 @@ class MemoMainView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('메모메모'),
+        title: const Text('메모메모 ५✍(ಠ益ಠ )'),
         actions: [
           IconButton(
               onPressed: () {

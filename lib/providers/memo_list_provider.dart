@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:remainder_flutter/models/memo.dart';
 import 'package:remainder_flutter/services/memo_service.dart';
+import 'package:remainder_flutter/utils/index.dart';
 
 class MemoListProvider with ChangeNotifier {
   final MemoService _service = MemoService();
@@ -19,6 +20,7 @@ class MemoListProvider with ChangeNotifier {
 
   void saveMemo(Memo memo) async {
     await _service.save(memo);
+    memo.noticeDate!.isNotEmpty && notificationCreate(memo);
     findMemoList();
   }
 
