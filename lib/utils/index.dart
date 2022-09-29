@@ -8,7 +8,7 @@ import 'package:memomemo/providers/memo_provider.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
-showSnack(BuildContext context) => (String message) {
+Function showSnack(BuildContext context) => (String message) {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text(message)));
     };
@@ -32,7 +32,7 @@ void showAddMemoModal(BuildContext context, dynamic obj, String type) {
       });
 }
 
-_closeAddMemoModal(BuildContext context) {
+void _closeAddMemoModal(BuildContext context) {
   Navigator.pop(context);
 }
 
@@ -60,7 +60,7 @@ Future<void> notificationCreate(Memo memo) async {
           UILocalNotificationDateInterpretation.absoluteTime);
 }
 
-notificationRemove(int id) async {
+Future<void> notificationRemove(int id) async {
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
   await flutterLocalNotificationsPlugin.cancel(id);

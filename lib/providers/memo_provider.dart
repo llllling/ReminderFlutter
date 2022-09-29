@@ -6,7 +6,7 @@ class MemoProvider with ChangeNotifier {
   Memo memo;
   MemoProvider(this.memo);
 
-  _modifyMemoProperty(String modifyObj, dynamic modifyValue) {
+  void _modifyMemoProperty(String modifyObj, dynamic modifyValue) {
     memo.setProperty(modifyObj, modifyValue);
     notifyListeners();
   }
