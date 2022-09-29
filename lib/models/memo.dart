@@ -21,14 +21,15 @@ class Memo {
     return m;
   }
 
-  Map<String, Object> toJson() {
-    Map<String, Object> json = {
+  Map<String, Object?> toJson() {
+    Map<String, Object?> json = {
       'content': content!,
       'noticeDate': noticeDate!,
+      'notifyId': notifyId
     };
     if (id != null) json['id'] = id!;
     if (repeat != null) json['repeat'] = repeat!.code.toString();
-    if (notifyId != null) json['notifyId'] = notifyId.toString();
+
     return json;
   }
 

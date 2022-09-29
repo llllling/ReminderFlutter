@@ -2,11 +2,12 @@ import 'package:flutter/cupertino.dart';
 
 class AddModalMenu extends StatelessWidget {
   const AddModalMenu(
-      {super.key, required this.children, required this.childWhenClick});
+      {super.key, required this.children, this.onTab, this.onTabModal});
   final List<Widget> children;
-  final Widget childWhenClick;
+  final Function? onTab;
+  final Widget? onTabModal;
 
-  void _showDemoPicker({
+  void _showModal({
     required BuildContext context,
     required Widget child,
   }) {
@@ -23,10 +24,15 @@ class AddModalMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        _showDemoPicker(
-          context: context,
-          child: _MenuClickContainer(child: childWhenClick),
-        );
+        if (onTabModal != null) {
+          _showModal(
+            context: context,
+            child: _MenuClickContainer(child: onTabModal!),
+          );
+        }
+        if (onTab != null) {
+          onTab!();
+        }
       },
       child: _Menu(
         children: children,

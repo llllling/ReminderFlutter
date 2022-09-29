@@ -20,28 +20,36 @@ class MemoListProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void saveMemo(Memo memo) async {
+  Future<void> _notifyRemove(int? id) async {
+    if (id == null) return;
+    await notificationRemove(id);
+  }
+
+  Future<void> _notifyCreateNdbSaveModify(Memo memo, Function dbExec) async {
     if (memo.noticeDate!.isNotEmpty) {
       memo.notifyId = Random().nextInt(10000);
-      await _service.save(memo);
+      await dbExec(memo);
       await notificationCreate(memo);
     } else {
+      memo.notifyId = null;
       await _service.save(memo);
     }
+  }
+
+  void saveMemo(Memo memo) async {
+    await _notifyCreateNdbSaveModify(memo, _service.save);
     findMemoList();
   }
 
   void removeMemo(Memo memo) async {
     await _service.remove(memo.id!);
-    if (memo.notifyId != null) {
-      await notificationRemove(memo.notifyId!);
-    }
+    await _notifyRemove(memo.notifyId);
     findMemoList();
   }
 
   void modifyMemo(Memo memo) async {
-    await _service.modify(memo);
-
+    await _notifyRemove(memo.notifyId);
+    await _notifyCreateNdbSaveModify(memo, _service.modify);
     findMemoList();
   }
 

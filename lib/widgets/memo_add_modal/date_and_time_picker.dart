@@ -12,7 +12,7 @@ class DateAndTimePicker extends StatelessWidget {
     String noticeDate = provider.memo.noticeDate ?? '';
 
     return AddModalMenu(
-      childWhenClick: CupertinoDatePicker(
+      onTabModal: CupertinoDatePicker(
         backgroundColor: CupertinoColors.systemBackground.resolveFrom(context),
         mode: CupertinoDatePickerMode.dateAndTime,
         initialDateTime: stringToDate(noticeDate),

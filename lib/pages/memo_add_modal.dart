@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:memomemo/widgets/memo_add_modal/data_and_time_use_button.dart';
 import 'package:provider/provider.dart';
 import 'package:memomemo/models/memo.dart';
 import 'package:memomemo/providers/memo_list_provider.dart';
@@ -32,6 +33,7 @@ class MemoAddModal extends StatelessWidget {
       child: Column(
         children: [
           ContentTextField(provider: memoProvider),
+          DateAndTimeUseButton(provider: memoProvider),
           DateAndTimePicker(provider: memoProvider),
           RepeatPicker(
             provider: memoProvider,

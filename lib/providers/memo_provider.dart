@@ -4,6 +4,7 @@ import 'package:memomemo/models/repeat_cycle.dart';
 
 class MemoProvider with ChangeNotifier {
   Memo memo;
+  bool isDataAndTimeEnable = false;
   MemoProvider(this.memo);
 
   void _modifyMemoProperty(String modifyObj, dynamic modifyValue) {
@@ -21,5 +22,10 @@ class MemoProvider with ChangeNotifier {
 
   void setRepeat(RepeatCycle newValue) {
     _modifyMemoProperty('repeat', newValue);
+  }
+
+  void setIsDataAndTimeEnable() {
+    isDataAndTimeEnable = !isDataAndTimeEnable;
+    notifyListeners();
   }
 }
