@@ -2,7 +2,7 @@ import 'package:memomemo/models/memo.dart';
 import 'package:memomemo/repository/db_helpers.dart';
 
 class MemoService {
-  late final DBHelper dbHelper = DBHelper();
+  final DBHelper dbHelper = DBHelper();
   final String tableName = 'memo';
 
   String getDBPath() {

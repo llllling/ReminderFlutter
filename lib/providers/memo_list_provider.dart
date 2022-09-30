@@ -2,11 +2,12 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:memomemo/models/memo.dart';
+import 'package:memomemo/models/notify.dart';
 import 'package:memomemo/services/memo_service.dart';
-import 'package:memomemo/utils/index.dart';
 
 class MemoListProvider with ChangeNotifier {
   final MemoService _service = MemoService();
+  final Notify notify = Notify();
   List<Memo> _memoList = [];
   List<Memo> get memoList => _memoList;
 
@@ -22,14 +23,14 @@ class MemoListProvider with ChangeNotifier {
 
   Future<void> _notifyRemove(int? id) async {
     if (id == null) return;
-    await notificationRemove(id);
+    await notify.remove(id);
   }
 
   Future<void> _notifyCreateNdbSaveModify(Memo memo, Function dbExec) async {
     if (memo.noticeDate!.isNotEmpty) {
       memo.notifyId = Random().nextInt(10000);
       await dbExec(memo);
-      await notificationCreate(memo);
+      await notify.create(memo);
     } else {
       memo.notifyId = null;
       await _service.save(memo);

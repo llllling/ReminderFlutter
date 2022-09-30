@@ -6,18 +6,23 @@ class Memo {
   String? noticeDate = '';
   RepeatCycle? repeat;
   int? notifyId;
+  bool isDateBeforeNow = false;
   Memo();
 
   factory Memo.fromJson(Map<String, Object?> json) {
     Memo m = Memo();
     m.id = int.parse(json['id'].toString());
-    m.content = json['content'] != null ? json['content'].toString() : '';
-    m.noticeDate =
-        json['noticeDate'] != null ? json['noticeDate'].toString() : '';
+    m.content = json['content'].toString();
+    if (json['noticeDate'].toString().isNotEmpty) {
+      m.noticeDate = json['noticeDate'].toString();
+      m.isDateBeforeNow = DateTime.parse(json['noticeDate'].toString())
+          .isBefore(DateTime.now());
+    }
     m.repeat = RepeatCycle.fromJson(json);
     if (json['notifyId'] != null) {
       m.notifyId = int.parse(json['notifyId'].toString());
     }
+
     return m;
   }
 
