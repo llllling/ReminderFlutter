@@ -23,6 +23,13 @@ class MemoMainView extends StatelessWidget {
                 size: 24.0,
               )),
           IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                Icons.delete_outline,
+                color: Colors.white,
+                size: 24.0,
+              )),
+          IconButton(
               onPressed: () {
                 showAddMemoModal(context, Memo(), 'add');
               },
