@@ -23,6 +23,19 @@ class Notify {
     tz.initializeTimeZones();
   }
 
+  DateTimeComponents? _dateTimeRepeat(String? repeatCode) {
+    switch (repeatCode) {
+      case 'day':
+        return DateTimeComponents.time;
+      case 'week':
+        return DateTimeComponents.dayOfWeekAndTime;
+      case 'month':
+        return DateTimeComponents.dayOfMonthAndTime;
+      default:
+        return null;
+    }
+  }
+
   Future<void> create(Memo memo) async {
     await _flutterLocalNotificationsPlugin.zonedSchedule(
         memo.notifyId!,
@@ -35,7 +48,8 @@ class Notify {
                 channelDescription: 'your channel description')),
         androidAllowWhileIdle: true,
         uiLocalNotificationDateInterpretation:
-            UILocalNotificationDateInterpretation.absoluteTime);
+            UILocalNotificationDateInterpretation.absoluteTime,
+        matchDateTimeComponents: _dateTimeRepeat(memo.repeat?.code));
   }
 
   Future<void> remove(int id) async {

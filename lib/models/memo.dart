@@ -11,14 +11,17 @@ class Memo {
 
   factory Memo.fromJson(Map<String, Object?> json) {
     Memo m = Memo();
+    RepeatCycle repeat = RepeatCycle.fromJson(json);
     m.id = int.parse(json['id'].toString());
     m.content = json['content'].toString();
     if (json['noticeDate'].toString().isNotEmpty) {
       m.noticeDate = json['noticeDate'].toString();
-      m.isDateBeforeNow = DateTime.parse(json['noticeDate'].toString())
-          .isBefore(DateTime.now());
+      m.isDateBeforeNow = repeat.code == 'none'
+          ? DateTime.parse(json['noticeDate'].toString())
+              .isBefore(DateTime.now())
+          : false;
     }
-    m.repeat = RepeatCycle.fromJson(json);
+    m.repeat = repeat;
     if (json['notifyId'] != null) {
       m.notifyId = int.parse(json['notifyId'].toString());
     }
