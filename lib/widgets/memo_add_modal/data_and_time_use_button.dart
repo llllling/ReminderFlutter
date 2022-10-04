@@ -9,7 +9,10 @@ class DateAndTimeUseButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AddModalMenu(
-      onTab: () => provider.setIsDataAndTimeEnable(),
+      onTab: () {
+        FocusScope.of(context).unfocus();
+        provider.setIsDataAndTimeEnable();
+      },
       children: [
         const Text('날짜 사용 여부'),
         Flexible(
