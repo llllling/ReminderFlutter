@@ -28,12 +28,17 @@ class MemoProvider with ChangeNotifier {
     _modifyMemoProperty('noticeDate', newValue);
   }
 
-  void setRepeat(RepeatCycle newValue) {
+  void setRepeat([RepeatCycle? newValue]) {
     _modifyMemoProperty('repeat', newValue);
   }
 
   void setIsDataAndTimeEnable() {
     isDataAndTimeEnable = !isDataAndTimeEnable;
+    if (!isDataAndTimeEnable) {
+      setNoticeDate('');
+      setRepeat();
+      return;
+    }
     notifyListeners();
   }
 

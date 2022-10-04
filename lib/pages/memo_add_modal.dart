@@ -35,7 +35,7 @@ class MemoAddModal extends StatelessWidget {
       color: CupertinoColors.white,
       child: Column(
         children: [
-          ContentTextField(provider: memoProvider),
+          ContentTextField(provider: memoProvider, isFocus: type == 'add'),
           DateAndTimeUseButton(provider: memoProvider),
           DateAndTimePicker(provider: memoProvider),
           RepeatPicker(

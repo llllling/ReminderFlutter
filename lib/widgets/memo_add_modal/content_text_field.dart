@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:memomemo/providers/memo_provider.dart';
 
 class ContentTextField extends StatelessWidget {
-  const ContentTextField({super.key, required this.provider});
+  const ContentTextField(
+      {super.key, required this.provider, required this.isFocus});
   final MemoProvider provider;
+  final bool isFocus;
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      autofocus: true,
+      autofocus: isFocus,
       focusNode: provider.contetnFous,
       initialValue: provider.memo.content,
       onChanged: (value) {
