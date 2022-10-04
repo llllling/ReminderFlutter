@@ -33,10 +33,10 @@ class Memo {
     Map<String, Object?> json = {
       'content': content!,
       'noticeDate': noticeDate!,
-      'notifyId': notifyId
+      'notifyId': notifyId,
+      'repeat': repeat?.code.toString() ?? 'none'
     };
     if (id != null) json['id'] = id!;
-    if (repeat != null) json['repeat'] = repeat!.code.toString();
 
     return json;
   }

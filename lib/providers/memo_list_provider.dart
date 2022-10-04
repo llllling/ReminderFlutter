@@ -33,7 +33,7 @@ class MemoListProvider with ChangeNotifier {
       await notify.create(memo);
     } else {
       memo.notifyId = null;
-      await _service.save(memo);
+      await dbExec(memo);
     }
   }
 
