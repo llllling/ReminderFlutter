@@ -38,10 +38,10 @@ class MemoProvider with ChangeNotifier {
   }
 
   bool validationCheck(BuildContext context) {
-    if (memo.content!.isEmpty) {
-      FocusScope.of(context).requestFocus(contetnFous);
-      return false;
+    if (memo.content!.isNotEmpty) {
+      return true;
     }
-    return true;
+    FocusScope.of(context).requestFocus(contetnFous);
+    return false;
   }
 }

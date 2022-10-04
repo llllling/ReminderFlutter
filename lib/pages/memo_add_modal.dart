@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:memomemo/widgets/memo_add_modal/data_and_time_use_button.dart';
 import 'package:provider/provider.dart';
-import 'package:memomemo/models/memo.dart';
 import 'package:memomemo/providers/memo_list_provider.dart';
 import 'package:memomemo/providers/memo_provider.dart';
 import 'package:memomemo/widgets/common/modal_button.dart';
@@ -20,7 +19,7 @@ class MemoAddModal extends StatelessWidget {
     if (!memoProvider.validationCheck(context)) {
       return;
     }
-    ;
+
     type == 'add'
         ? memoListProvider.saveMemo(memoProvider.memo)
         : memoListProvider.modifyMemo(memoProvider.memo);
