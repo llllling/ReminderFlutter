@@ -16,7 +16,10 @@ class Notify {
         const AndroidInitializationSettings('@mipmap/ic_launcher');
     _initializationSettings =
         InitializationSettings(android: _initializationSettingsAndroid);
-    _flutterLocalNotificationsPlugin.initialize(_initializationSettings);
+    _flutterLocalNotificationsPlugin.initialize(
+      _initializationSettings,
+      onDidReceiveNotificationResponse: (NotificationResponse r) {},
+    );
     tz.initializeTimeZones();
   }
 

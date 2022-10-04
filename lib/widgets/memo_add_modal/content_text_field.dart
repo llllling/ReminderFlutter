@@ -7,6 +7,8 @@ class ContentTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      autofocus: true,
+      focusNode: provider.contetnFous,
       initialValue: provider.memo.content,
       onChanged: (value) {
         provider.setContent(value);

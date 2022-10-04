@@ -15,11 +15,15 @@ class MemoAddModal extends StatelessWidget {
   final Function closeModalFunc;
   final String type;
 
-  void onSave(
-      BuildContext context, Memo memo, MemoListProvider memoListProvider) {
+  void onSave(BuildContext context, MemoProvider memoProvider,
+      MemoListProvider memoListProvider) {
+    if (!memoProvider.validationCheck(context)) {
+      return;
+    }
+    ;
     type == 'add'
-        ? memoListProvider.saveMemo(memo)
-        : memoListProvider.modifyMemo(memo);
+        ? memoListProvider.saveMemo(memoProvider.memo)
+        : memoListProvider.modifyMemo(memoProvider.memo);
     Navigator.pop(context);
   }
 
@@ -46,7 +50,7 @@ class MemoAddModal extends StatelessWidget {
                 child: ModalButton(
                     buttonText: '저장',
                     onPressed: () =>
-                        onSave(context, memoProvider.memo, memoListProvider))),
+                        onSave(context, memoProvider, memoListProvider))),
             Expanded(
               child: ModalButton(
                 buttonText: '취소',

@@ -5,8 +5,14 @@ import 'package:memomemo/models/repeat_cycle.dart';
 class MemoProvider with ChangeNotifier {
   Memo memo;
   bool isDataAndTimeEnable = false;
+  FocusNode contetnFous = FocusNode();
   MemoProvider(this.memo) {
     isDataAndTimeEnable = memo.noticeDate!.isNotEmpty;
+  }
+  @override
+  void dispose() {
+    contetnFous.dispose();
+    super.dispose();
   }
 
   void _modifyMemoProperty(String modifyObj, dynamic modifyValue) {
@@ -29,5 +35,13 @@ class MemoProvider with ChangeNotifier {
   void setIsDataAndTimeEnable() {
     isDataAndTimeEnable = !isDataAndTimeEnable;
     notifyListeners();
+  }
+
+  bool validationCheck(BuildContext context) {
+    if (memo.content!.isEmpty) {
+      FocusScope.of(context).requestFocus(contetnFous);
+      return false;
+    }
+    return true;
   }
 }
