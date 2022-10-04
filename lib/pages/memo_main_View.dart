@@ -1,11 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:memomemo/models/memo.dart';
+import 'package:memomemo/pages/memo_trash.dart';
+import 'package:memomemo/providers/memo_list_provider.dart';
 import 'package:memomemo/utils/file.dart';
 import 'package:memomemo/utils/index.dart';
 import 'package:memomemo/widgets/memo_main_view/memo_list.dart';
+import 'package:memomemo/widgets/memo_main_view/memo_list_card.dart';
+import 'package:provider/provider.dart';
 
 class MemoMainView extends StatelessWidget {
   const MemoMainView({Key? key}) : super(key: key);
+
+  Future<void> goTrashPage(BuildContext context) async {
+    final MemoListProvider memoListProvider =
+        Provider.of<MemoListProvider>(context, listen: false);
+    await memoListProvider.findMemoTrashList();
+    Navigator.push<void>(
+      context,
+      MaterialPageRoute<void>(
+        builder: (BuildContext context) => const MemoTrash(),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +39,7 @@ class MemoMainView extends StatelessWidget {
                 size: 24.0,
               )),
           IconButton(
-              onPressed: () {},
+              onPressed: () => goTrashPage(context),
               icon: const Icon(
                 Icons.delete_outline,
                 color: Colors.white,
@@ -40,7 +56,10 @@ class MemoMainView extends StatelessWidget {
               ))
         ],
       ),
-      body: const MemoList(),
+      body: MemoList(
+        children: (Memo memo, MemoListProvider value) =>
+            MemoListCard(memo, onDelete: (Memo memo) => value.removeMemo(memo)),
+      ),
     );
   }
 }

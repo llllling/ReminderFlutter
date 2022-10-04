@@ -21,6 +21,12 @@ class MemoListProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> findMemoTrashList() async {
+    List findResult = await _service.findAll(isRemove: '1');
+    _memoList = findResult.map((data) => Memo.fromJson(data)).toList();
+    notifyListeners();
+  }
+
   Future<void> _notifyRemove(int? id) async {
     if (id == null) return;
     await notify.remove(id);
@@ -47,6 +53,8 @@ class MemoListProvider with ChangeNotifier {
     await _notifyRemove(memo.notifyId);
     findMemoList();
   }
+
+  //스레기통 비우기까지 해야함
 
   void modifyMemo(Memo memo) async {
     await _notifyRemove(memo.notifyId);

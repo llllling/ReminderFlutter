@@ -9,10 +9,10 @@ class MemoService {
     return dbHelper.dbPath;
   }
 
-  Future<List<Map<String, Object?>>> findAll() async {
+  Future<List<Map<String, Object?>>> findAll({String isRemove = '0'}) async {
     return dbHelper.rawQueryForSelect(DBDto(
         queryString:
-            ' SELECT mm.content, mm.id , mm.noticeDate, mm.notifyId, rc.code, rc.name FROM memo mm INNER JOIN repeat_cycle rc ON mm.repeat = rc.code AND mm.isRemove = 0 ORDER BY mm.id DESC'));
+            ' SELECT mm.content, mm.id , mm.noticeDate, mm.notifyId, rc.code, rc.name FROM memo mm INNER JOIN repeat_cycle rc ON mm.repeat = rc.code AND mm.isRemove = $isRemove ORDER BY mm.id DESC'));
   }
 
   Future<int> save(Memo memo) async {
