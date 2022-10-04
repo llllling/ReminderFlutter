@@ -10,7 +10,7 @@ Function showSnack(BuildContext context) => (String message) {
     };
 
 String formatDate(DateTime date) {
-  return DateFormat('yyyy-MM-dd kk:mm').format(date);
+  return DateFormat('yyyy-MM-dd (E) kk:mm', 'ko').format(date);
 }
 
 DateTime stringToDate([String date = '']) {
