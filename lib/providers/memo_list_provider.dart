@@ -54,7 +54,10 @@ class MemoListProvider with ChangeNotifier {
     findMemoList();
   }
 
-  //스레기통 비우기까지 해야함
+  void removeAllMemo() async {
+    await _service.removeIsRemoveTrue();
+    findMemoTrashList();
+  }
 
   void modifyMemo(Memo memo) async {
     await _notifyRemove(memo.notifyId);

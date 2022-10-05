@@ -27,6 +27,12 @@ class MemoService {
     );
   }
 
+  Future<void> removeIsRemoveTrue() async {
+    return dbHelper.rawQueryExecute(
+      DBDto(queryString: 'DELETE FROM memo WHERE isRemove = "1"'),
+    );
+  }
+
   Future<int> modify(Memo memo) async {
     return dbHelper.modify(DBDto(
         tableName: tableName,

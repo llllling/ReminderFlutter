@@ -18,7 +18,8 @@ class MemoMainView extends StatelessWidget {
     Navigator.push<void>(
       context,
       MaterialPageRoute<void>(
-        builder: (BuildContext context) => const MemoTrash(),
+        builder: (BuildContext context) =>
+            MemoTrash(provider: memoListProvider),
       ),
     );
   }
