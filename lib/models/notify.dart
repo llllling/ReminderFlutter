@@ -44,8 +44,12 @@ class Notify {
         tz.TZDateTime.from(DateTime.parse(memo.noticeDate!), tz.local),
         const NotificationDetails(
             android: AndroidNotificationDetails(
-                'your channel id', 'your channel name',
-                importance: Importance.max, priority: Priority.high)),
+          'your channel id',
+          'your channel name',
+          importance: Importance.max,
+          priority: Priority.high,
+          playSound: true,
+        )),
         payload: memo.notifyId.toString(),
         androidAllowWhileIdle: true,
         uiLocalNotificationDateInterpretation:
