@@ -49,13 +49,23 @@ class MemoListProvider with ChangeNotifier {
   }
 
   void removeMemo(Memo memo) async {
-    await _service.remove(memo.id!);
+    await _service.updateIsRemoveTrue(memo.id!);
     await _notifyRemove(memo.notifyId);
     findMemoList();
   }
 
-  void removeAllMemo() async {
-    await _service.removeIsRemoveTrue();
+  void restoreMemo(Memo memo) async {
+    await _service.restore(memo.id!);
+    findMemoTrashList();
+  }
+
+  void removeTrash(Memo memo) async {
+    await _service.remove(memo.id!);
+    findMemoTrashList();
+  }
+
+  void removeAllTrash() async {
+    await _service.removeAll();
     findMemoTrashList();
   }
 

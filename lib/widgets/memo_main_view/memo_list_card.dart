@@ -4,15 +4,15 @@ import 'package:memomemo/utils/index.dart';
 import 'package:memomemo/widgets/memo_main_view/list_tile_subtitle.dart';
 
 class MemoListCard extends StatelessWidget {
-  const MemoListCard(this.memo, {Key? key, required this.onDelete})
+  const MemoListCard(this.memo, {Key? key, required this.onRemove})
       : super(key: key);
   final Memo memo;
-  final Function onDelete;
+  final Function onRemove;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onDoubleTap: () => onDelete(memo),
+        onDoubleTap: () => onRemove(memo),
         child: Card(
             child: ListTile(
           tileColor:

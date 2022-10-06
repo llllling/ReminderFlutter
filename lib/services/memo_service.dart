@@ -19,11 +19,31 @@ class MemoService {
     return dbHelper.save(DBDto(tableName: tableName, data: memo.toJson()));
   }
 
-  Future<void> remove(int id) async {
+  Future<void> updateIsRemoveTrue(int id) async {
     return dbHelper.rawQueryExecute(
       DBDto(
           queryString:
               'UPDATE memo SET isRemove = 1, notifyId = null WHERE id = $id'),
+    );
+  }
+
+  Future<void> restore(int id) async {
+    return dbHelper.rawQueryExecute(
+      DBDto(
+          queryString:
+              'UPDATE memo SET isRemove = 0, noticeDate = "", repeat = "none" WHERE id = $id'),
+    );
+  }
+
+  Future<void> remove(int id) async {
+    return dbHelper.rawQueryExecute(
+      DBDto(queryString: 'DELETE FROM memo WHERE id = $id'),
+    );
+  }
+
+  Future<void> removeAll() async {
+    return dbHelper.rawQueryExecute(
+      DBDto(queryString: 'DELETE FROM memo WHERE isRemove = "1"'),
     );
   }
 

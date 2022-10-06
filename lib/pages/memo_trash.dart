@@ -23,7 +23,7 @@ class MemoTrash extends StatelessWidget {
         actions: [
           IconButton(
               onPressed: () {
-                provider.removeAllMemo();
+                provider.removeAllTrash();
               },
               icon: const Icon(
                 Icons.cached,
@@ -33,8 +33,11 @@ class MemoTrash extends StatelessWidget {
         ],
       ),
       body: MemoList(
-        children: (Memo memo, MemoListProvider value) => MemoTrashListCard(memo,
-            onDelete: (Memo memo) => value.removeMemo(memo)),
+        children: (Memo memo, MemoListProvider value) => MemoTrashListCard(
+          memo,
+          onRemove: value.removeTrash,
+          onRestore: value.restoreMemo,
+        ),
       ),
     );
   }
