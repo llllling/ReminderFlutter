@@ -7,23 +7,23 @@ import 'package:memomemo/services/memo_service.dart';
 
 class MemoListProvider with ChangeNotifier {
   final MemoService _service = MemoService();
-  final Notify notify = Notify();
-  List<Memo> _memoList = [];
-  List<Memo> get memoList => _memoList;
+  late final Notify notify;
+  List<Memo> memoList = [];
 
   MemoListProvider() {
     findMemoList();
+    notify = Notify(_setTrueIsDateBeforeNow);
   }
 
   void findMemoList() async {
     List findResult = await _service.findAll();
-    _memoList = findResult.map((data) => Memo.fromJson(data)).toList();
+    memoList = findResult.map((data) => Memo.fromJson(data)).toList();
     notifyListeners();
   }
 
   Future<void> findMemoTrashList() async {
     List findResult = await _service.findAll(isRemove: '1');
-    _memoList = findResult.map((data) => Memo.fromJson(data)).toList();
+    memoList = findResult.map((data) => Memo.fromJson(data)).toList();
     notifyListeners();
   }
 
@@ -63,6 +63,16 @@ class MemoListProvider with ChangeNotifier {
     await _notifyRemove(memo.notifyId);
     await _notifyCreateNdbSaveModify(memo, _service.modify);
     findMemoList();
+  }
+
+  void _setTrueIsDateBeforeNow(String notifyId) {
+    memoList.any((memo) {
+      if (memo.notifyId.toString() == notifyId) {
+        memo.isDateBeforeNow = true;
+      }
+      return memo.notifyId.toString() == notifyId;
+    });
+    notifyListeners();
   }
 
   void close() {

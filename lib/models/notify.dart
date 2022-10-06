@@ -9,16 +9,16 @@ class Notify {
   final FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
 
-  static final Notify _notify = Notify._internal();
-  factory Notify() => _notify;
-  Notify._internal() {
+  Notify(void Function(String notifyId) notifyAfterExecuteFunc) {
     _initializationSettingsAndroid =
         const AndroidInitializationSettings('@mipmap/ic_launcher');
     _initializationSettings =
         InitializationSettings(android: _initializationSettingsAndroid);
     _flutterLocalNotificationsPlugin.initialize(
       _initializationSettings,
-      onDidReceiveNotificationResponse: (NotificationResponse r) {},
+      onDidReceiveNotificationResponse: (NotificationResponse r) {
+        notifyAfterExecuteFunc(r.payload!);
+      },
     );
     tz.initializeTimeZones();
   }
@@ -45,7 +45,8 @@ class Notify {
         const NotificationDetails(
             android: AndroidNotificationDetails(
                 'your channel id', 'your channel name',
-                channelDescription: 'your channel description')),
+                importance: Importance.max, priority: Priority.high)),
+        payload: memo.notifyId.toString(),
         androidAllowWhileIdle: true,
         uiLocalNotificationDateInterpretation:
             UILocalNotificationDateInterpretation.absoluteTime,
