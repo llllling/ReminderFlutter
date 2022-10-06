@@ -12,7 +12,7 @@ class MemoListProvider with ChangeNotifier {
 
   MemoListProvider() {
     findMemoList();
-    notify = Notify(_setTrueIsDateBeforeNow);
+    notify = Notify(setIsDateBeforeNow);
   }
 
   void findMemoList() async {
@@ -75,13 +75,19 @@ class MemoListProvider with ChangeNotifier {
     findMemoList();
   }
 
-  void _setTrueIsDateBeforeNow(String notifyId) {
-    memoList.any((memo) {
-      if (memo.notifyId.toString() == notifyId) {
-        memo.isDateBeforeNow = true;
-      }
-      return memo.notifyId.toString() == notifyId;
-    });
+  bool _isDateBeforNowFor(bool check, Function execWhenTrue) {
+    if (check) {
+      execWhenTrue();
+    }
+    return check;
+  }
+
+  void setIsDateBeforeNow(compareValue, {bool isTrue = true}) {
+    memoList.any((memo) => _isDateBeforNowFor(
+        isTrue
+            ? memo.notifyId.toString() == compareValue
+            : memo.id == compareValue,
+        () => memo.isDateBeforeNow = isTrue));
     notifyListeners();
   }
 

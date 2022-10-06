@@ -9,7 +9,7 @@ class Notify {
   final FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
 
-  Notify(void Function(String notifyId) notifyAfterExecuteFunc) {
+  Notify(Function notifyAfterExecuteFunc) {
     _initializationSettingsAndroid =
         const AndroidInitializationSettings('@mipmap/ic_launcher');
     _initializationSettings =

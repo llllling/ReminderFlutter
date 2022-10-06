@@ -58,8 +58,11 @@ class MemoMainView extends StatelessWidget {
         ],
       ),
       body: MemoList(
-        children: (Memo memo, MemoListProvider value) =>
-            MemoListCard(memo, onRemove: value.removeMemo),
+        children: (Memo memo, MemoListProvider value) => MemoListCard(
+          memo,
+          onRemove: value.removeMemo,
+          onChange: value.setIsDateBeforeNow,
+        ),
       ),
     );
   }
