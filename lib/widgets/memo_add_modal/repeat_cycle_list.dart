@@ -18,9 +18,9 @@ class RepeatList extends StatelessWidget {
             children: (RepeatCycle data) => OutlinedButton(
                 style: OutlinedButton.styleFrom(
                   backgroundColor:
-                      data.code == selected?.code ? Colors.lime : Colors.white,
+                      data.code == selected?.code ? Colors.blue : Colors.white,
                   foregroundColor:
-                      data.code == selected?.code ? Colors.white : Colors.lime,
+                      data.code == selected?.code ? Colors.white : Colors.blue,
                 ),
                 onPressed: () {
                   repeatChange(data);
