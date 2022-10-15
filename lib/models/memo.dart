@@ -16,10 +16,8 @@ class Memo {
     m.content = json['content'].toString();
     if (json['noticeDate'].toString().isNotEmpty) {
       m.noticeDate = json['noticeDate'].toString();
-      m.isDateBeforeNow = repeat.code == 'none'
-          ? DateTime.parse(json['noticeDate'].toString())
-              .isBefore(DateTime.now())
-          : false;
+      m.isDateBeforeNow = DateTime.parse(json['noticeDate'].toString())
+          .isBefore(DateTime.now());
     }
     m.repeat = repeat;
     if (json['notifyId'] != null) {
