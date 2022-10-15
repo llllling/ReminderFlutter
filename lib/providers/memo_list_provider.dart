@@ -89,15 +89,15 @@ class MemoListProvider with ChangeNotifier {
 
   String increaseNoticeDate(Memo memo) {
     final code = memo.repeat!.code;
-    final noticeData = DateTime.parse(memo.noticeDate!);
+    final noticeData = DateTime.tryParse(memo.noticeDate!);
 
     switch (code) {
       case 'day':
-        return Jiffy(noticeData).add(days: 1).toString();
+        return Jiffy(noticeData).add(days: 1).format("yyyy-MM-dd HH:mm:ss");
       case 'week':
-        return Jiffy(noticeData).add(days: 7).toString();
+        return Jiffy(noticeData).add(days: 7).format("yyyy-MM-dd HH:mm:ss");
       case 'month':
-        return Jiffy(noticeData).add(months: 1).toString();
+        return Jiffy(noticeData).add(months: 1).format("yyyy-MM-dd HH:mm:ss");
     }
     return memo.noticeDate!;
   }
