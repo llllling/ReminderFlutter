@@ -61,7 +61,7 @@ class MemoMainView extends StatelessWidget {
         children: (Memo memo, MemoListProvider value) => MemoListCard(
           memo,
           onRemove: value.removeMemo,
-          onChange: value.setIsDateBeforeNow,
+          onChange: value.reflashByOneTab,
         ),
       ),
     );

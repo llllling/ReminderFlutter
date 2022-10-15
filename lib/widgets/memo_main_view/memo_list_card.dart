@@ -13,7 +13,10 @@ class MemoListCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTap: () => onChange(memo.id, isTrue: false),
+        onTap: () =>
+            memo.isDateBeforeNow &&
+            memo.repeat!.code != 'none' &&
+            onChange(memo.id),
         onDoubleTap: () => onRemove(memo),
         child: Card(
             child: ListTile(

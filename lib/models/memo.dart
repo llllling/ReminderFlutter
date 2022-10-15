@@ -54,4 +54,12 @@ class Memo {
         return;
     }
   }
+
+  @override
+  bool operator ==(Object other) {
+    return other is Memo && other.id == id;
+  }
+
+  @override
+  int get hashCode => id!;
 }

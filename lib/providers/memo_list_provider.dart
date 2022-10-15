@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:jiffy/jiffy.dart';
 import 'package:memomemo/models/memo.dart';
 import 'package:memomemo/models/notify.dart';
 import 'package:memomemo/services/memo_service.dart';
@@ -12,7 +13,7 @@ class MemoListProvider with ChangeNotifier {
 
   MemoListProvider() {
     findMemoList();
-    notify = Notify(setIsDateBeforeNow);
+    notify = Notify(setTrueIsDateBeforeNow);
   }
 
   void findMemoList() async {
@@ -75,19 +76,38 @@ class MemoListProvider with ChangeNotifier {
     findMemoList();
   }
 
-  bool _isDateBeforNowFor(bool check, Function execWhenTrue) {
-    if (check) {
-      execWhenTrue();
-    }
-    return check;
+  Memo atMemo(Function whereFuc) {
+    final copyMemoList = memoList;
+    return copyMemoList.where((element) => whereFuc(element)).first;
   }
 
-  void setIsDateBeforeNow(compareValue, {bool isTrue = true}) {
-    memoList.any((memo) => _isDateBeforNowFor(
-        isTrue
-            ? memo.notifyId.toString() == compareValue
-            : memo.id == compareValue,
-        () => memo.isDateBeforeNow = isTrue));
+  void setTrueIsDateBeforeNow(String notifyId) {
+    atMemo((element) => element.notifyId == int.parse(notifyId))
+        .isDateBeforeNow = true;
+    notifyListeners();
+  }
+
+  String increaseNoticeDate(Memo memo) {
+    final code = memo.repeat!.code;
+    final noticeData = DateTime.parse(memo.noticeDate!);
+
+    switch (code) {
+      case 'day':
+        return Jiffy(noticeData).add(days: 1).toString();
+      case 'week':
+        return Jiffy(noticeData).add(days: 7).toString();
+      case 'month':
+        return Jiffy(noticeData).add(months: 1).toString();
+    }
+    return memo.noticeDate!;
+  }
+
+  void reflashByOneTab(int id) {
+    final memo = atMemo((element) => element.id == id);
+    memo.isDateBeforeNow = false;
+    memo.noticeDate = increaseNoticeDate(memo);
+    _service.modify(memo);
+    findMemoList();
     notifyListeners();
   }
 
