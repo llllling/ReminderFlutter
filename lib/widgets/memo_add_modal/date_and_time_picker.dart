@@ -14,7 +14,7 @@ class DateAndTimePicker extends StatelessWidget {
     return provider.isDataAndTimeEnable
         ? AddModalMenu(
             onTabModal: CupertinoDatePicker(
-              minimumDate: DateTime.now(),
+              minimumDate: stringToDate(noticeDate),
               backgroundColor:
                   CupertinoColors.systemBackground.resolveFrom(context),
               mode: CupertinoDatePickerMode.dateAndTime,

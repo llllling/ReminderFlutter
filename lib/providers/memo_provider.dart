@@ -43,6 +43,9 @@ class MemoProvider with ChangeNotifier {
   }
 
   bool validationCheck(BuildContext context) {
+    if (DateTime.parse(memo.noticeDate!).isBefore(DateTime.now())) {
+      memo.noticeDate = '';
+    }
     if (memo.content!.isNotEmpty) {
       return true;
     }
